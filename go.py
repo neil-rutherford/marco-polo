@@ -1,12 +1,19 @@
+# Functional imports
 from flask import Flask
+from config import Config
+from flask_sqlalchemy import SQLAlchemy
+from flask_migrate import Migrate
 
-#Blueprint imports
+# Blueprint imports
 from usa_applicant_system import routes as usa_applicant
 
-#Register blueprints
 def get_app():
+    # Initialize
     app = Flask(__name__)
-    #app.config_from_object('config.Config')
+    app.config.from_object('config.Config')
+    db = SQLAlchemy(app)
+    migrate = Migrate(app, db)
+    # Register blueprints
     app.register_blueprint(usa_applicant.app)
     return app
 

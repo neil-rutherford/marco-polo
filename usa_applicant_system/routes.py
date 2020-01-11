@@ -57,27 +57,39 @@ def info_work_visa():
 def info_affiliate_disclosure():
     return render_template('info_affiliate_disclosure.html')
 
+# EMPLOYER REPORTING
+
+# Report a low-ball contract while still in the system
+#app.route('/usa-applicant/report/contract#<grievance>')
+#def report_contract(grievance):
+#    ///////////////////////////////////////
+
+# Report a POS company as an alumnus
+#app.route('/report')
+#def report_company():
+#    ///////////////////////////////////////
+
 # TAKE ACTION
 
-@app.route('/usa-applicant/get/teaching-credential')
-@app.route('/usa-applicant/get/forms') #diploma, fbi, toefl, medical check
-@app.route('/usa-applicant/download-packet/police-clearance')
-@app.route('/usa-applicant/download-packet/authentications')
-@app.route('/usa-applicant/download-packet/medical-check')
-@app.route('/usa-applicant/get/police-station')
-@app.route('/usa-applicant/get/clinic')
-@app.route('/usa-applicant/get/resume')
-@app.route('/usa-applicant/get/letters-of-recommendation')
-@app.route('/usa-applicant/get/contract')
-@app.route('/usa-applicant/get/china-flight')
-@app.route('/usa-applicant/get/vpn')
-@app.route('/usa-applicant/get/work-visa')
+#@app.route('/usa-applicant/get/teaching-credential')
+#@app.route('/usa-applicant/get/forms') #diploma, fbi, toefl, medical check
+#@app.route('/usa-applicant/download-packet/police-clearance')
+#@app.route('/usa-applicant/download-packet/authentications')
+#@app.route('/usa-applicant/download-packet/medical-check')
+#@app.route('/usa-applicant/get/police-station')
+#@app.route('/usa-applicant/get/clinic')
+#@app.route('/usa-applicant/get/resume')
+#@app.route('/usa-applicant/get/letters-of-recommendation')
+#@app.route('/usa-applicant/get/contract')
+#@app.route('/usa-applicant/get/china-flight')
+#@app.route('/usa-applicant/get/vpn')
+#@app.route('/usa-applicant/get/work-visa')
 
 # Receipt uploads
 
-@app.route('/usa-applicant/upload/teaching-credential', methods=['GET', 'POST'])
-@app.route('/usa-applicant/upload/authentications', methods=['GET', 'POST'])
-@app.route('/usa-applicant/upload/police-clearance', methods=['GET', 'POST'])
-@app.route('/usa-applicant/upload/medical-check', methods=['GET', 'POST'])
-@app.route('/usa-applicant/upload/china-flight', methods=['GET', 'POST'])
-@app.route('/usa-applicant/upload/work-visa', methods=['GET', 'POST'])
+#@app.route('/usa-applicant/upload/teaching-credential', methods=['GET', 'POST'])
+#@app.route('/usa-applicant/upload/authentications', methods=['GET', 'POST'])
+#@app.route('/usa-applicant/upload/police-clearance', methods=['GET', 'POST'])
+#@app.route('/usa-applicant/upload/medical-check', methods=['GET', 'POST'])
+#@app.route('/usa-applicant/upload/china-flight', methods=['GET', 'POST'])
+#@app.route('/usa-applicant/upload/work-visa', methods=['GET', 'POST'])

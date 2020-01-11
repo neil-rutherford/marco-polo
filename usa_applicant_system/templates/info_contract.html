@@ -1,0 +1,106 @@
+{% extends "info_base.html" %}
+
+{% block section_name %}
+<h1>Employment Contract</h1>
+{% endblock %}
+
+{% block what %}
+<p>Take this opportunity to look over your contract before you sign it. We'll try our best to give you a feel for what's normal. Report employers if we ask you to!</p>
+{% endblock %}
+
+{% block why %}
+<p>We are in the business of trust. That's part of why we have you run the gauntlet with the authentications and background check. We want to be able to guarantee that our applicants are high quality. If we connect an employer with a criminal or an underqualified worker, they will not be happy and won't use our services in the future.</p>
+
+<p>Similarly, we know that if we connect you with a bad school, you will not be happy and won't send us any more business. When employers sign up for our service, they agree to certain terms regarding your employment. For example, they agree to provide you a work visa, to pay you a minimum amount, and to provide you with a certain number of days off. If they low-ball you, please tell us so we can take appropriate action.</p>
+{% endblock %}
+
+{% block cost %}
+<p>Only a few minutes of your time!</p>
+{% endblock %}
+
+{% block next_steps %}
+<h2>Contract Requirements</h2>
+<p>"Requirements" are conditions that companies have already agreed to. Report "requirements" violations.</p>
+<p>"Suggestions" are pointers from us to you. Negotiate these with the company, but do not report them.</p>
+<p>"Context" helps you navigate cultural barriers, given this is probably your first time in China.</p>
+<br>
+<h3>0. CONTRACT LANGUAGE</h3>
+<ul>
+	<li><b>REQUIREMENT:</b> The contract is written in Chinese and English. The two languages say the same thing.</li>
+	<li><b>CONTEXT:</b> When in doubt, the Chinese version has to prevail because that's where the courts are. Welcome to working abroad!</li>
+	<li><a href="{{ url_for(report_contract, grievance="Contract Language") }}"><b>REPORT</b></a></li>
+</ul>
+<h3>1. EMPLOYMENT PERIOD</h3>
+<ul>
+	<li><b>REQUIREMENT:</b> One year contract.</li>
+	<li><a href="{{ url_for(report_contract, grievance="Employment Period") }}"><b>REPORT</b></a></li>
+</ul>
+<h3>2. JOB DUTIES</h3>
+<ul>
+	<li><b>SUGGESTION:</b> Use your best judgement here.</li>
+</ul>
+<h3>3. WORK PLACE</h3>
+<ul>
+	<li><b>SUGGESTION:</b> Travel expenses for business trips should be reimbursed by your employer. 300-500 RMB/day for room and board and 30-50 RMB/day for transportation are reasonable requests.</li>
+</ul>
+<h3>4. WORKING TIME</h3>
+<ul>
+	<li><b>REQUIREMENT:</b> Your employer can't break <a href="http://project.mofcom.gov.cn/1800000121_39_3119_0_7.html">Chinese labor laws</a>.</li>
+	<li><b>REQUIREMENT:</b> Your employer can't make you work more than 44 hours per week (~9 hours/day).</li>
+	<li><b>CONTEXT:</b> When your employer asks you to work overtime without pay, treat it like a cultural misunderstanding. Understand that it's no big deal for employers when they ask their Chinese employees to work overtime. As a foreigner, you can say no. Stand your ground and gently push back by reminding them it's your day off.</li>
+	<li><b>CONTEXT:</b> Think of when the kids are in school and when they have time to take your classes. If you're working for a tutoring agency, it makes sense for you to work nights and weekends. It's common to get Monday and Tuesday off, work evenings (12:00-20:00) from Wednesday to Friday, and then work a normal shift (09:00-17:00) on Saturday and Sunday.</li>
+	<li><a href="{{ url_for(report_contract, grievance="Working Time") }}"><b>REPORT</b></a></li>
+</ul>
+<h3>5. RENUMERATION AND BENEFITS</h3>
+<ul>
+	<li><b>REQUIREMENT:</b> Minimum monthly salary of 15,000 RMB.</li>
+	<li><b>REQUIREMENT:</b> Salary shall be paid promptly on the first of the month. (e.g. Payment for work done in October will be paid on October 1.)</li>
+	<li><b>CONTEXT:</b> Not getting paid on time is a big enough deal that quitting would be justified.</li>
+	<li><b>REQUIREMENT:</b> Payments will be made in the form of direct deposit into your bank account.</li>
+	<li><b>CONTEXT:</b> Just like in the US, cash payments hint at criminal activity and should be considered a red flag.</li>
+	<li><b>SUGGESTION:</b> Try to get your employer to pay your income tax for you.</li>
+	<li><b>SUGGESTION:</b> Some places will give bonuses based on how many students you teach. Worth asking about!</li>
+	<li><b>REQUIREMENT:</b> Your employer will provide you with housing.</li>
+	<li><b>SUGGESTION:</b> Try to get them to pay for your utilities too!
+	<li><b>CONTEXT:</b> You want a place to stay on your first night. You also don't want to have to deal with rentals and bureaucracy.</li>
+	<li><b>REQUIREMENT:</b> Your employer will provide you with medical insurance for the duration of your contract.</li>
+	<li><b>REQUIREMENT:</b> They will pay your way back to the US at the end of your contract.</li>
+	<li><b>CONTEXT:</b> We're paying your way over this time.</li>
+	<li><a href="{{ url_for(report_contract, grievance="Renumeration and Benefits") }}"><b>REPORT</b></a></li>
+</ul>
+<h3>6. VACATIONS</h3>
+<ul>
+	<li><b>REQUIREMENT:</b> Minimum 15 days of paid vacation (not including Chinese holidays, such as Spring Festival).</li>
+	<li><b>SUGGESTION:</b> Negotiate for more. Two weeks a year is not very much time to visit your family.</li>
+	<li><b>SUGGESTION:</b> Ask for sick days. You don't want to lose your vacation because some kid forgot to wash his hands.</li>
+	<li><b>CONTEXT:</b> Employers will usually give you holidays off, but not the day itself. For example, everyone gets October 1 off for National Day. All those kids who got the day off school will come to you for classes, so you'll have to work on October 1. Then you'll get some other day off to compensate.</li> 
+	<li><b><a href="{{ url_for(report_contract, grievance="Vacations") }}">REPORT</a></b></li>
+</ul>
+<h3>7. EMPLOYER OBLIGATIONS</h3>
+<ul>
+	<li><b>REQUIREMENT:</b> They must provide you with a Z visa (work visa).</li>
+	<li><b>SUGGESTION:</b> They must help you with any government bureaucracy, such as visa renewals or registering with the police station.</li>
+	<li><b>CONTEXT:</b> All foreigners have to register with their local police station when they arrive. It's a problem if you forget/don't know how to do it.</li>
+	<li><b><a href="{{ url_for(report_contract, grievance="Employer Obligations") }}">REPORT</a></b></li>
+</ul>
+<h3>8. EMPLOYEE OBLIGATIONS</h3>
+<p>Use your best judgement.</p>
+
+<h3>9. SPECIAL ARRANGEMENTS</h3>
+<p>Use your best judgement.</p>
+
+<h3>10. TERMINATION AND RENEWAL OF CONTRACT</h3>
+<p>Use your best judgement.</p>
+
+<h3>11. RESTRICTIONS ON OTHER WORK</h3>
+<p>Two jobs, one work visa is actually a deportable offense!</p>
+
+<h3>12. CONFIDENTIALITY</h3>
+<p>Hey, you're not discussing your contract with us. We're discussing it with you! :)</p>
+
+<h3>13. LIABILITY FOR BREACH OF CONTRACT</h3>
+<p>Use your best judgement.</p>
+
+<h3>14. OTHER CONSIDERATIONS</h3>
+<p>Use your best judgement.</p>
+{% endblock %}

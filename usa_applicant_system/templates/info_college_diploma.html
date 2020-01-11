@@ -1,0 +1,75 @@
+{% extends "info_base.html" %}
+
+{% block section_name %}
+<h1>College Diploma</h1>
+{% endblock %}
+
+{% block what %}
+<p>Send your original college diploma to CVSC Houston for the following:</p>
+<ol>
+	<li>Notarization by their in-house notary public.</li>
+	<li>Authentication by the Texas Secretary of State.</li>
+	<li>Authentication by the Chinese consulate in Houston.</li>
+</ol>
+{% endblock %}
+
+{% block why %}
+<p>China has three different tiers for work visas -- A, B, and C. This tier system was implemented in 2017, and its goal is to streamline the work visa process and ensure a high level of foreign talent. If you are curious about the different tiers, you can learn more <a href="https://www.china-briefing.com/news/china-work-permits-are-you-a-b-c-tier-talent/">here</a>.</p>
+
+<p>You need to have a Tier B work visa to be an English teacher. One requirement for a Tier B visa is a bachelor's degree, which you are providing evidence of here. The document first needs to be notarized so that the Chinese embassy knows your degree is legitimate and has not been forged. It is then authenticated by the Chinese embassy so that government authorities in China know that your diploma is legitimate.</p>
+
+<p>Normally, the process would take 3-5 steps, depending on which state you are from and where you went to school. However, by partnering with CVSC, we are able to streamline the process and take advantage of favorable conditions in Texas. To cut down on shipping costs, we are going to have you ship your college diploma and your TEFL/TOEFL certificate together.</p>
+{% endblock %}
+
+{% block cost %}
+<p>Thank you for your business. By using our service, you will save <strong>$70.00</strong> while authenticating these two documents. Please find the approximate costs outlined below:</p>
+
+<table>
+	<thead>
+		<tr>
+			<th colspan="2"><b>Authentication -- Diploma and Teaching Certification</b></th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>Shipping to Houston</td>
+			<td>$35.00</td>
+		</tr>
+		<tr>
+			<td>Shipping from Houston</td>
+			<td>$35.00</td>
+		</tr>
+		<tr>
+			<td>Chinese Embassy Fees</td>
+			<td>$50.00</td>
+		</tr>
+		<tr>
+			<td>Texas Secretary of State Fees</td>
+			<td>$30.00</td>
+		</tr>
+		<tr>
+			<td>Government Processing Fees</td>
+			<td>$4.72</td>
+		</tr>
+		<tr>
+			<td>CVSC Service Fees</td>
+			<td>$258.00</td>
+		</tr>
+		<tr>
+			<td>Total Cost (2 Documents)</td>
+			<td>$412.72</td>
+		</tr>
+	</tbody>
+</table>
+
+<p><i><u>Disclaimer:</u> These prices are for reference only and may change.</i></p>
+{% endblock %}
+
+{% block next_steps %}
+<ol>
+	<li>Find your original diploma. If you have misplaced it, order a new one from your university.</li>
+	<li>Obtain your TEFL/TOEFL teaching certificate.</li>
+	<li>Go <a href={{ url_for(get_forms) }}>here</a> to fill out, download, and print your Authentication Packet.</li>
+	<li>Mail your diploma, teaching certificate, and paperwork to CVSC in Houston. Follow the instructions on page 1 of your Authentication Packet.</li>
+</ol>
+{% endblock %}

@@ -1,0 +1,14 @@
+info_affiliate_disclosure.html
+info_base.html
+
+[ ]	info_china_flight.html
+[X]	info_college_diploma.html
+[X]	info_contract.html
+[ ]	info_letters_of_recommendation.html
+[ ]	info_medical_check.html
+[ ]	info_passport.html
+[ ]	info_police_clearance.html
+[ ]	info_resume.html
+[X]	info_teaching_credential.html
+[X]	info_vpn.html
+[ ]	info_work_visa.html

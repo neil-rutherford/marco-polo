@@ -1,0 +1,65 @@
+{% extends "info_base.html" %}
+
+{% block section_name %}
+<h1>Virtual Private Network (VPN)</h1>
+{% endblock %}
+
+{% block what %}
+<p>Google sucks! Does the thought of using Bing excite you?</p>
+<p>Twitter sucks! Can't wait to see what's trending on Weibo?</p>
+<p>Gmail sucks! Ready to start using Hotmail again?</p>
+<p>Youtube sucks! Looking forward to watching videos on Youku?</p>
+<br>
+<p>If this doesn't sound like you, we highly recommend purchasing a Virtual Private Network (VPN) subscription before coming to China.</p> 
+{% endblock %}
+
+{% block why %}
+<p>Chinese cyberspace is strictly controlled by the government. Any government that the Chinese government cannot control/censor is blocked in China. This includes (but is not limited to):</p>
+<ul>
+	<li><b>Google services:</b> Search, Gmail, Maps, Calendar, App Store</li>
+	<li><b>Social media networks:</b> Facebook, Twitter, Reddit, Instagram, Youtube</li>
+	<li><b>Apps that use infrastructure made by blocked companies:</b> Spotify, Tinder, Soundcloud (all use Facebook to log in)</li>
+	<li><b>News outlets:</b> New York Times, Washington Post, CNN, Wall Street Journal</li>
+	<li><b>Blogging platforms:</b> Tumblr, Wordpress</li>
+</ul>
+<p>A VPN makes it look like you are accessing the internet from another country, which allows you to access sites that are blocked in China. This will allow you to stay connected with the outside world and contact your family. If you are interested in learning more, <a href="https://www.arbitror.org/home/welcome-to-chinese-intranet">here</a> is an article about VPNs and digital censorship in China.</p>
+
+<h2>Yeah, But...</h2>
+<ul>
+	<li><b>I don't want to have to spend money on a VPN.</b> Yeah, but if you don't pay for a product, then you are the product. With VPNs, your search history is the product. If that doesn't make you feel warm and fuzzy inside, I don't know what will.</li>
+	<li><b>Can't I just get one when I arrive in China?</b> Yeah, but the websites you would use to purchase a VPN subscription are blocked in China. It would be kind of dumb to invest millions of dollars in digital censorship and then leave the VPN websites unblocked, don't you think?</li>
+	<li><b>Can't I just use the local Chinese internet like everyone else?</b> Yeah, but we're trying to help reduce the amount of "digital culture shock" you have when you get here. Plus, VPNs help protect your privacy by encrypting your traffic online.</li>
+	<li><b>Aren't you just recommending that we buy a VPN so that you'll get a commission?</b> Yeah, but we use VPNs too. Let me give you a personal example. I (the web developer) am currently in China writing this page. I'm thinking about a Google service that I'm going to have to use for this site. Because Google sites are blocked here, I have to use a VPN to learn how to use that tool. If I wanted to watch a tutorial on Youtube, I'd also have to use a VPN. I also need a VPN when I download the tool. I use my VPN many times a day, and it makes a big difference in my life when there are service disruptions.</li>
+{% endblock %}
+
+{% block cost %}
+<p>Thank you for your business. By using our affiliate link, you are helping us make a small commission. Because this is a personal product, we unfortunately cannot offer reimbursement. Please find the approximate costs outlined below:</p>
+
+<table>
+	<thead>
+		<tr>
+			<th colspan="2"><b>ExpressVPN Subscription Cost</b></th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>1 Month</td>
+			<td>$12.95</td>
+		</tr>
+		<tr>
+			<td>6 Months</td>
+			<td>$59.95</td>
+		</tr>
+		<tr>
+			<td>12 Months</td>
+			<td>$99.95</td>
+		</tr>
+	</tbody>
+</table>
+
+<p><i><u>Disclaimer:</u> These prices are for reference only and may change.</i></p>
+{% endblock %}
+
+{% block next_steps %}
+<p>Please follow <a href={{ url_for(get_vpn) }}>this link</a> to purchase a VPN subscription.</p>
+{% endblock %}

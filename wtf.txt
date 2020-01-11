@@ -1,0 +1,32 @@
+//////////////////////////////////////////////////////////
+---VENV AND DEPENDENCIES---
+
+Initialize a virtual environment:
+	python3 -m venv venv
+
+Activate the virtual environment:
+	source venv/bin/activate
+
+Pip install dependencies from "requirements.txt":
+	python3 -m pip install -r requirements.txt
+
+//////////////////////////////////////////////////////////
+---FLASK APP---
+
+Tell Flask how to import your application:
+	export FLASK_APP=go.py
+
+//////////////////////////////////////////////////////////
+---FLASK MIGRATE---
+
+Create database migration repository (like "git init"):
+	flask db init
+
+Create first database migration (like "git commit"):
+	flask db migrate -m "{message}"
+
+Apply migration (like "git push"):
+	flask db upgrade
+
+Remove migration:
+	flask db downgrade

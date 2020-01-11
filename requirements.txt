@@ -1,3 +1,6 @@
 flask
 flask-wtf
 pdfrw
+flask-sqlalchemy
+flask-migrate
+
