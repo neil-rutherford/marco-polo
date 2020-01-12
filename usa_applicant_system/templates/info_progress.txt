@@ -6,7 +6,7 @@
 [X]	info_contract.html			Needs grammar check, needs link building for report forms
 [ ]	info_letters_of_recommendation.html	
 [X]	info_medical_check.html			Needs a second pass
-[ ]	info_passport.html			
+[X]	info_passport.html			Needs grammar check, links are good
 [ ]	info_police_clearance.html
 [ ]	info_resume.html
 [X]	info_teaching_credential.html		Needs grammar check, needs affiliate links
