@@ -1,14 +1,14 @@
-info_affiliate_disclosure.html
-info_base.html
+[ ]	info_affiliate_disclosure.html		
+[ ]	info_base.html				Functional but ugly as fuck
 
-[ ]	info_china_flight.html
-[X]	info_college_diploma.html
-[X]	info_contract.html
-[ ]	info_letters_of_recommendation.html
-[X]	info_medical_check.html			Cost info and where to go need to be updated
-[ ]	info_passport.html
+[ ]	info_china_flight.html			Can't start: waiting for response from United
+[X]	info_college_diploma.html		Needs grammar check, needs affiliate links
+[X]	info_contract.html			Needs grammar check, needs link building for report forms
+[ ]	info_letters_of_recommendation.html	
+[X]	info_medical_check.html			Needs a second pass
+[ ]	info_passport.html			
 [ ]	info_police_clearance.html
 [ ]	info_resume.html
-[X]	info_teaching_credential.html
-[X]	info_vpn.html
+[X]	info_teaching_credential.html		Needs grammar check, needs affiliate links
+[X]	info_vpn.html				Needs grammar check, needs affiliate links
 [ ]	info_work_visa.html
