@@ -5,7 +5,7 @@ info_base.html
 [X]	info_college_diploma.html
 [X]	info_contract.html
 [ ]	info_letters_of_recommendation.html
-[ ]	info_medical_check.html
+[X]	info_medical_check.html			Cost info and where to go need to be updated
 [ ]	info_passport.html
 [ ]	info_police_clearance.html
 [ ]	info_resume.html
