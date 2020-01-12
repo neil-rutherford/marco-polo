@@ -7,7 +7,7 @@
 [ ]	info_letters_of_recommendation.html	
 [X]	info_medical_check.html			Needs a second pass
 [X]	info_passport.html			Needs grammar check, links are good
-[ ]	info_police_clearance.html
+[X]	info_police_clearance.html		Needs a second pass, needs affiliate links
 [ ]	info_resume.html
 [X]	info_teaching_credential.html		Needs grammar check, needs affiliate links
 [X]	info_vpn.html				Needs grammar check, needs affiliate links
