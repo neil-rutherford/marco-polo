@@ -6,6 +6,7 @@ from flask_migrate import Migrate
 
 # Blueprint imports
 from usa_applicant_system import routes as usa_applicant
+from signup_system import routes as signup
 
 def get_app():
     # Initialize
@@ -15,6 +16,7 @@ def get_app():
     migrate = Migrate(app, db)
     # Register blueprints
     app.register_blueprint(usa_applicant.app)
+    app.register_blueprint(signup.app)
     return app
 
 app = get_app()
