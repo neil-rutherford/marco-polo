@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, redirect, url_for
 from flask import current_app as app
-from signup_system.forms import USA_ApplicantScreen, China_EmployerScreen#, USA_ApplicantSignup
+from signup_system.forms import USA_ApplicantScreen, China_EmployerScreen, USA_ApplicantSignup
 import uuid
 
 
@@ -8,8 +8,12 @@ app = Blueprint('signup', __name__,
         template_folder = 'templates',
         static_folder = 'static')
 
+###################################################
+# //////////---------- SCREENS ----------\\\\\\\\\\
+###################################################
 
-# Pre-qualifies US applicants and generates the client_id needed to sign up
+# SCREEN: USA APPLICANT
+
 @app.route('/screen/usa-applicant', methods=['GET', 'POST'])
 def screen_usa_applicant():
     form = USA_ApplicantScreen()
@@ -21,8 +25,8 @@ def screen_usa_applicant():
             return redirect(url_for('signup.screen_eng_nope'))
     return render_template('screen_usa_applicant.html', form=form)
 
+# SCREEN: CHINA EMPLOYER
 
-# Pre-qualifies Chinese employers and generates the client_id needed to sign up
 @app.route('/screen/china-employer', methods=['GET', 'POST'])
 def screen_china_employer():
     form = China_EmployerScreen()
@@ -35,33 +39,47 @@ def screen_china_employer():
     return render_template('screen_china_employer.html', form=form)
 
 
-# Failed pre-qualification (English)
+######################################################
+# //////////---------- FAIL PAGES ----------\\\\\\\\\\
+######################################################
+
+
+# ENGLISH NOPE
+
 @app.route('/screen/eng/nope', methods=['GET'])
 def screen_eng_nope():
     return render_template('screen_eng_nope.html')
 
 
-# Failed pre-qualification (Chinese)
+# CHINESE NOPE
+
 @app.route('/screen/chi/nope', methods=['GET'])
 def screen_chi_nope():
     return render_template('screen_chi_nope.html')
 
 
-# No client_id was provided, so redirect back to the screening page
+################################################################
+# //////////---------- USA APPLICANT SIGNUP ----------\\\\\\\\\\
+################################################################
+
+
+# NO CLIENT ID?
+
 @app.route('/signup/usa-applicant', methods=['GET'])
 def redirect_screen_usa_applicant():
     return redirect(url_for('signup.screen_usa_applicant'))
 
 
-# Client_id was provided, so start the signup process
+# USA APPLICANT SIGN UP PAGE
+
 @app.route('/signup/usa-applicant/id=<client_id>', methods=['GET', 'POST'])
 def signup_usa_applicant(client_id):
-    #form = USA_ApplicantSignup()
+    form = USA_ApplicantSignup()
     if client_id:
-        #if form.validate_on_submit():
-            #return "Yeehaw bitch"
-        #return render_template('signup_usa_applicant.html', form=form)
-        return "{}".format(client_id)
+        if form.validate_on_submit():
+            return "{}".format(form.first_name.data)
+        return render_template('signup_usa_applicant.html', form=form)
+        #return "{}".format(client_id)
     else:
         return redirect(url_for('signup.screen_usa_applicant'))
     return redirect(url_for('signup.screen_usa_applicant'))
@@ -81,6 +99,11 @@ def signup_china_employer(client_id):
     else:
         return redirect(url_for('signup.screen_china_employer'))
     return redirect(url_for('signup.screen_china_employer'))
+
+
+@app.route('/terms/usa-applicant/', methods=['GET'])
+def terms_usa_applicant():
+    return render_template('terms_usa_applicant.html')
 
 
 #@app.route('/signup/usa-affiliate')
