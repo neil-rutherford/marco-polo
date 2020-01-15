@@ -1,0 +1,121 @@
+{% extends "signup_base.html" %}
+
+{% block content %}
+<h1>Let's get started with a few questions!</h1>
+<form action="" method="post" novalidate>
+	{{ form.hidden_tag() }}
+	<p>
+            {{ form.business_license.label }}<br>
+            {{ form.business_license(size=32) }}<br>
+            {% for error in form.business_license.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+	<p>
+            {{ form.education_license.label }}<br>
+            {{ form.education_license(size=32) }}<br>
+            {% for error in form.education_license.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+	<p>
+            {{ form.z_visa.label }}<br>
+            {{ form.z_visa(size=32) }}<br>
+            {% for error in form.z_visa.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+	<p>
+            {{ form.one_year.label }}<br>
+            {{ form.one_year(size=32) }}<br>
+            {% for error in form.one_year.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+	<p>
+            {{ form.labor_law.label }}<br>
+            {{ form.labor_law(size=32) }}<br>
+            {% for error in form.labor_law.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+	<p>
+            {{ form.max_hours.label }}<br>
+            {{ form.max_hours(size=32) }}<br>
+            {% for error in form.max_hours.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+	<p>
+            {{ form.min_salary.label }}<br>
+            {{ form.min_salary(size=32) }}<br>
+            {% for error in form.min_salary.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+	<p>
+            {{ form.payment_time.label }}<br>
+            {{ form.payment_time(size=32) }}<br>
+            {% for error in form.payment_time.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+	<p>
+            {{ form.direct_deposit.label }}<br>
+            {{ form.direct_deposit(size=32) }}<br>
+            {% for error in form.direct_deposit.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+	<p>
+            {{ form.housing.label }}<br>
+            {{ form.housing(size=32) }}<br>
+            {% for error in form.housing.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+	<p>
+            {{ form.medical_insurance.label }}<br>
+            {{ form.medical_insurance(size=32) }}<br>
+            {% for error in form.medical_insurance.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+	<p>
+            {{ form.airfare.label }}<br>
+            {{ form.airfare(size=32) }}<br>
+            {% for error in form.airfare.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+	<p>
+            {{ form.vacation.label }}<br>
+            {{ form.vacation(size=32) }}<br>
+            {% for error in form.vacation.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+	<p>
+            {{ form.language.label }}<br>
+            {{ form.language(size=32) }}<br>
+            {% for error in form.language.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+	<p>
+            {{ form.service_fee.label }}<br>
+            {{ form.service_fee(size=32) }}<br>
+            {% for error in form.service_fee.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+	<p>
+            {{ form.terms.label }}<br>
+            {{ form.terms(size=32) }}<br>
+            {% for error in form.terms.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+	<p>{{ form.submit() }}</p>
+</form>
+{% endblock %}

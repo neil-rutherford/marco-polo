@@ -1,0 +1,25 @@
+{% extends "signup_base.html" %}
+
+{% block content %}
+<h1>We're Sorry...</h1>
+
+<p>...but we're stopping you here because you don't qualify for our program. Trust us, it's better this way. We just don't want you to spend thousands of dollars and then find out that you've been blacklisted and not receive a refund. Nothing against you personally!</p>
+
+<p>Here are some possible reasons why you don't qualify:</p>
+<ul>
+	<li><b>You are not allowed to employ foreigners.</b> This could be because you don't have a business license, an education license, or both.</li><br>
+	<li><b>You are not committed to legal employment.</b> This could be because you didn't agree to provide your foreign workers with Z visas, because you didn't agree to follow labor laws, or because you don't want to provide medical insurance.</li><br>
+	<li><b>You want a contract that lasts for less than one year.</b> We hope to provide you with full-time employees that have contracts lengths of at least a year.</li><br>
+	<li><b>You want your employee to work more than 9 hours a day.</b> We understand that businesses may sometimes require their employees to work overtime, but 996 business models are not fair to employees. Foreign workers are accustomed to 40-hour workweeks with additional compensation for overtime.</li><br>
+	<li><b>You can't afford a foreign teacher.</b> To qualify for a tier B work visa, foreign employees need to meet certain salary requirements. In addition, they need to make a certain amount of money to justify leaving their friends and family back home. Finally, agreeing to a minimum salary shows that you are operating in good faith.</li><br>
+	<li><b>You can't guarantee that you will pay your employees on time.</b> If you can't pay your employees on time, you shouldn't be running a business.</li><br>
+	<li><b>You want to pay your employees in cash.</b> Cash payments are a red flag and hint at criminal activity and/or tax evasion.</li><br>
+	<li><b>You don't want to provide your foreign employee with a standard benefits package.</b> This could be because you don't want to provide airfare, housing, or vacation time.</li><br>
+	<li><b>You don't want to have a bilingual contract.</b></li><br>
+	<li><b>You didn't accept our terms.</b> Guess we'll just have to agree to disagree, eh?</li><br>
+</ul>
+
+<p>If you believe there was a mistake, click <a href="{{ url_for('signup.screen_china_employer') }}">here</a> to complete the questionnaire again.</p>
+<p>Otherwise, we're sorry to see you go and wish you all the best finding a foreign teacher. Thank you for understanding.</p>
+
+{% endblock %}
