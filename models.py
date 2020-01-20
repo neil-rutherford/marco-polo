@@ -1,34 +1,11 @@
 from . import db
 
-'''
-{GLOBAL DEFINITIONS:}
-    IDENTIFYING INFORMATION     : Information used to identify and personalize accounts. Includes login information.
-    BREADCRUMBS                 : Better-safe-than-sorry information for analytics and legal cases.
-    FOREIGN KEYS                : Shows how this relates to other tables in the database.
-    ACTION NEEDED               : Things we need to do on our end (e.g. punish, contact, pay...)
-    PROGRESS TRACKING           : Booleans for applicants. False unless completed. Straightforward, so no explanations.
-'''
-
 ###############################################################
 # //////////---------- USA APPLICANT MODEL ----------\\\\\\\\\\
 ###############################################################
 
 class USA_Applicant(db.Model):
-    '''
-    ID              : [int]         : Primary key for `usa_applicant` table.
-    FIRST_NAME      : [str(35)]     : Applicant's first name.
-    LAST_NAME       : [str(35)]     : Applicant's surname.
-    EMAIL           : [str(70)      : Applicant's email address / username.
-    CELL_PHONE      : [int]         : Applicant's cell number. (+1)
-    PASSWORD_HASH   : [str(128)]    : Hashed version of the applicant's password.
-    HOME_CITY       : [str(22)]     : City where the applicant lives.
-    HOME_STATE      : [int]         : `xyyzzz`, where x is country code, yy is state code, and zzz is county code (CA only).
-    HOME_ZIP        : [int]         : Applicant's ZIP code.
-    TIMESTAMP       : [datetime]    : When the account was created (UTC).
-    CLIENT_ID       : [str(44)]     : UUID starting with 'USA_APP_'. Indicates that they completed the screening form.
-    AFFILIATE_ID    : [int]         : Name of `usa_affiliate`, if applicable.
-    EMPLOYER_ID     : [int]         : If going to China, this is the employer's id. Otherwise, null.
-    '''
+
     __tablename__ = 'usa_applicant'
     
     # IDENTIFYING INFORMATION
@@ -48,7 +25,7 @@ class USA_Applicant(db.Model):
 
     # FOREIGN KEYS
     affiliate_id = db.Column(db.Integer, db.ForeignKey('usa_affiliate.id'), nullable = True)
-    employer_id = db.Column(db.Integer, db.ForeignKey('china_employer.id'), nullable = True)
+    #employer_id = db.Column(db.Integer, db.ForeignKey('china_employer.id'), nullable = True)
     
     # PROGRESS TRACKING
     is_china_flight = db.Column(db.Boolean, index = False, unique = False, nullable = False)
@@ -122,7 +99,7 @@ class China_Employer(db.Model):
 
     # FOREIGN KEYS
     affiliate_id = db.Column(db.Integer, db.ForeignKey('china_affiliate.id'), nullable = True)
-    employee_id = db.relationship('USA_Applicant', backref='employer', lazy='dynamic')
+    #employee_id = db.relationship('USA_Applicant', backref='employer', lazy='dynamic')
 
     # ACTION NEEDED
     is_blacklist = db.Column(db.Boolean,index = False,unique = False,nullable = False)
@@ -136,23 +113,7 @@ class China_Employer(db.Model):
 ###############################################################
 
 class USA_Affiliate(db.Model):
-    '''
-    ID              : [int]         : Primary key for `usa_affiliate` table.
-    EMAIL           : [str(70)]     : Affiliate's email address / username.
-    CELL_PHONE      : [int]         : Affiliate's cell phone number (+1).
-    PASSWORD_HASH   : [str(128)]    : Hashed version of the affiliate's password.
-    FIRST_NAME      : [str(35)]     : Affiliate's first name.
-    LAST_NAME       : [str(35)]     : Affiliate's surname.
-    CLIENT_ID       : [str(44)]     : UUID generated when screening form was successfully completed. Starts with 'USA_AFF_'.
-    ADDRESS_STREET  : [str(35)]     : Affiliate's street address.
-    ADDRESS_CITY    : [str(22)]     : What city does the affiliate live in?
-    ADDRESS_STATE   : [int]         : xyyzzz, where x is country code, yy is state code, and zzz is county code (if applicable).
-    ADDRESS_ZIP     : [int]         : Affiliate's ZIP code?
-    TIMESTAMP       : [datetime]    : When the account was created (UTC)
-    APPLICANTS      : [int]         : Links to applicants the affiliate recruited.
-    SKYPE_ID        : [str(70)]     : Skype ID for contact.
-    PAYPAL_EMAIL    : [str(70)]     : PayPal email address for pay-outs.
-    '''
+
     __tablename__ = 'usa_affiliate'
 
     # IDENTIFYING INFORMATION
@@ -187,21 +148,7 @@ class USA_Affiliate(db.Model):
 #################################################################
 
 class China_Affiliate(db.Model):
-    '''
-    ID                  : [int]         : `china_affiliate`表的主键
-    EMAIL               : [str(70)]     : 邮箱／用户名
-    CELL_PHONE          : [int]         : 手机号码
-    PASSWORD_HASH       : [str(128)]    : 密码的哈希版本
-    LAST_NAME           : [str(10)]     : 姓
-    GIVEN_NAME          : [str(10)]     : 名
-    CLIENT_ID           : [str(44)]     : 成功完成筛选表格时生成的UID, 'CHI_AFF_' 开头
-    ADDRESS_PROVINCE    : [int]         : xyyzzz, x=国家代码, yy=省代码, zzz=县代码（现在不支持县代码）
-    ADDRESS_CITY        : [str(10)]     : 地址（市）
-    ADDRESS_STREET      : [str(30)]     : 地址
-    TIMESTAMP           : [datetime]    : 帐户创建时间戳(UTC)
-    EMPLOYERS           : [int]         : 伙伴推荐的公司
-    WECHAT_ID           : [str(70)]     : 伙伴的微信号
-    '''
+
     __tablename__ = 'china_affiliate'
 
     # IDENTIFYING INFORMATION

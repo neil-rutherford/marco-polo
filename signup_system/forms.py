@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, SelectField, PasswordField, BooleanField, SubmitField
+from wtforms import StringField, SelectField, PasswordField, DateField, SubmitField
 from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError
 
 
@@ -46,89 +46,89 @@ class USA_ApplicantScreen(FlaskForm):
 
 class China_EmployerScreen(FlaskForm):
     
-    business_license = SelectField('Do you have a business license?',
-            choices=[('1', "Yes, we do."), 
-                ('0', "No, we don't.")],
-            validators=[DataRequired()])
+    business_license = SelectField('您有营业执照吗？',
+            choices=[('1', "有"), 
+                ('0', "没有")],
+            validators=[DataRequired(message='抱歉，此字段不能为空。')])
 
-    education_license = SelectField('Do you have an education license?',
-            choices=[('1', 'Yes, we do.'), 
-                ('0', "No, we don't.")],
-            validators = [DataRequired()])
+    education_license = SelectField('您有民办学校办学许可证吗？',
+            choices=[('1', '有'), 
+                ('0', "没有")],
+            validators = [DataRequired(message='抱歉，此字段不能为空。')])
 
-    z_visa = SelectField('Do you agree to provide the foreign teacher a Chinese work visa (Z visa)?',
-            choices=[('1', 'Yes, that is the only legal way to employ a foreigner.'), 
-                ('0', "What's a Z visa?")],
-            validators=[DataRequired()])
+    z_visa = SelectField('您是否同意向外教提供中国工作签证（Z 签证）？',
+            choices=[('1', '同意，这是雇用外国人的唯一合法方法。'), 
+                ('0', "Z 签证是什么东西？")],
+            validators=[DataRequired(message='抱歉，此字段不能为空。')])
     
-    one_year = SelectField('Are you willing to sign a 1-year contract?',
-            choices=[('1', 'Yes, we want long-term cooperation.'), 
-                ('0', 'No, we are looking for a short-term and/or part-time foreign teacher.')],
-            validators=[DataRequired()])
+    one_year = SelectField('您愿意签一年的合同吗？',
+            choices=[('1', '愿意，我们想要长期合作。'), 
+                ('0', '不愿意，我们要短期 / 兼职的外教。')],
+            validators=[DataRequired(message='抱歉，此字段不能为空。')])
 
-    labor_law = SelectField("Will your contract be in accordance with the Labor Law of the People's Repbulic of China?",
-            choices=[('1', 'Yes, that is the only legal way to employ a foreigner.'), 
-                ('0', "China has labor laws?")],
-            validators=[DataRequired()])
+    labor_law = SelectField("您的合同是否符合《中华人民共和国劳动法》？",
+            choices=[('1', '是的，这是雇用外国人的唯一合法方法。'), 
+                ('0', "中华人民共和国有劳动法吗？")],
+            validators=[DataRequired(message='抱歉，此字段不能为空。')])
 
-    max_hours = SelectField('Your foreign teacher will not work more than 44 hours per week. Is this acceptable for you?',
-            choices=[('1', 'Yes, our foreign teacher will not work more than 44 hours per week.'), 
-                ('0', 'No, our foreign teacher must work more than 44 hours per week.')],
-            validators=[DataRequired()])
+    max_hours = SelectField('您的外籍老师每周工作时间不会超过44小时。您可以接受吗？',
+            choices=[('1', '接受，我们的外籍老师每周工作时间不会超过44小时。'), 
+                ('0', '不接受，我们的外籍老师每周工作时间肯定会超过44小时。')],
+            validators=[DataRequired(message='抱歉，此字段不能为空。')])
 
-    min_salary = SelectField('If you are located in a first tier city, do you agree to pay your foreign teacher at least 15,000 RMB per month? If you are not located in a first tier city, do you agree to pay your foreign teacher at least 8,000 RMB per month? (This figure does not include benefits, such as rent, utilities, or airfare.)',
-            choices=[('1', 'Yes, we agree to pay our foreign teacher at least that much.'), 
-                ('0', 'No, we cannot agree to pay our foreign teacher that much.')],
-            validators=[DataRequired()])
+    min_salary = SelectField('如果您位于一线城市，您是否同意每月向您的外籍教师支付至少15,000人民币的薪水？ 如果您不在一线城市，您是否同意每月向您的外籍教师支付至少8,000人民币的薪水？ （此数字不包括诸如租金、水电费、机票等福利。）',
+            choices=[('1', '我们同意至少付给我们的外籍老师那么多。'), 
+                ('0', '我们不能同意向我们的外国老师支付那么多钱。')],
+            validators=[DataRequired(message='抱歉，此字段不能为空。')])
 
-    payment_time = SelectField('Do you agree to pay your foreign teacher promptly on the first day of each month? (i.e. Payment for work done in October will be paid on October 1.)',
-            choices=[('1', 'Yes, we will pay our foreign teacher on the first of the month.'), 
-                ('0', 'No, we cannot guarantee that we can pay our employees on time.')],
-            validators=[DataRequired()])
+    payment_time = SelectField('您是否同意在每个月的第一天及时向您的外籍教师付款？ （即，10月完成的工作将在10月1日支付。）',
+            choices=[('1', '同意，我们会在每月的第一天付钱给我们的外籍老师。'), 
+                ('0', '我们不能保证我们会准时向员工付款。')],
+            validators=[DataRequired(message='抱歉，此字段不能为空。')])
 
-    direct_deposit = SelectField('Will you pay your foreign teacher by direct deposit?',
-            choices=[('1', 'Yes, we will pay our foreign teacher by direct deposit.'), 
-                ('0', 'No, we will pay our foreign teacher in cash.')],
-            validators=[DataRequired()])
+    direct_deposit = SelectField('您会将外籍教师的工资存入银行帐户吗？',
+            choices=[('1', '当然！'), 
+                ('0', '不，我们将用现金支付外籍老师。')],
+            validators=[DataRequired(message='抱歉，此字段不能为空。')])
 
-    housing = SelectField('Do you agree to provide housing for your foreign teacher?',
-            choices=[('1', 'Yes, we will provide housing for our foreign teacher.'), 
-                ('0', 'No, we cannot agree to do that.')],
-            validators=[DataRequired()])
+    housing = SelectField('您是否同意为您的外籍老师提供住房？',
+            choices=[('1', '是的，我们将为外教提供住房。'), 
+                ('0', '不同意。')],
+            validators=[DataRequired(message='抱歉，此字段不能为空。')])
 
-    medical_insurance = SelectField('Do you agree to provide medical insurance to your foreign teacher?',
-            choices=[('1', 'Yes, in accordance with Chinese law, we will provide medical insurance.'), 
-                ('0', 'No, we cannot agree to do that.')],
-            validators=[DataRequired()])
+    medical_insurance = SelectField('您是否同意为外籍老师提供医疗保险？',
+            choices=[('1', '根据中国法律，我们将提供医疗保险。'), 
+                ('0', '不同意。')],
+            validators=[DataRequired(message='抱歉，此字段不能为空。')])
 
-    airfare = SelectField("Do you agree to pay for your foreign teacher's airfare to and from China at the beginning and end of their contract?",
-            choices=[('1', 'Yes, we agree to pay airfare to and from China.'), 
-                ('0', 'No, we cannot agree to that.')],
-            validators=[DataRequired()])
+    airfare = SelectField("您是否同意在合同开始和结束时为您的外籍老师来往中国的机票付款？",
+            choices=[('1', '同意。'), 
+                ('0', '不同意。')],
+            validators=[DataRequired(message='抱歉，此字段不能为空。')])
 
-    vacation = SelectField('Do you agree to give your foreign teacher at least 5 days of paid vacation per year (not including Chinese holidays)?',
-            choices=[('1', 'Yes, the foreign teacher will get at least 5 days of paid vacation.'), 
-                ('0', 'No, we cannot agree to that.')],
-            validators=[DataRequired()])
+    vacation = SelectField('您是否同意每年给您的外籍教师至少5天的带薪假期（不包括中国假期）？',
+            choices=[('1', '同意，外籍老师将获得至少5天的带薪假期。'), 
+                ('0', '不同意。')],
+            validators=[DataRequired(message='抱歉，此字段不能为空。')])
 
-    language = SelectField('The contract must be in both English and Chinese. The English text must match the Chinese text. Do you understand and accept this?',
-            choices=[('1', 'Yes, the foreign teacher should be able to read and understand what they are signing.'),
+    language = SelectField('合同必须使用英文和中文。 英文文本必须与中文文本匹配。 您了解并接受吗？',
+            choices=[('1', '接受，外籍老师应该能够阅读和理解他们所签署的内容。'),
                 ('0', "No, we don't think this is important enough to find a translator for.")],
-            validators=[DataRequired()])
+            validators=[DataRequired(message='抱歉，此字段不能为空。')])
 
-    service_fee = SelectField("We do our best to screen applicants and ensure they meet our requirements. To contact one of our applicants, you must first pay us. This payment consists of visa reimbursement fees, a finder's fee, and a service fee. In the event that the applicant is denied a visa, we will refund the visa fees and the finder's fee. However, the service fee is non-refundable. Do you understand and accept this?",
-            choices=[('1', 'Yes, we understand and accept.'), 
-                ('0', "No, we are no longer interested in your service.")],
-            validators=[DataRequired()])
+    service_fee = SelectField("我们会尽力筛选申请人，并确保他们符合我们的要求。要联系我们的一位申请人，您先必须向我们付款。这笔费用包括签证费用、推荐费、服务费。如果申请人被拒绝签证，我们将退还签证费和推荐费给您。但是，服务费不予退还。您了解并接受吗？",
+            choices=[('1', '了解并接受。'), 
+                ('0', "我们不再对您的服务感兴趣。")],
+            validators=[DataRequired(message='抱歉，此字段不能为空。')])
 
-    terms = SelectField("For many of our applicants, this is their first time leaving their home country. We want to make sure that they have a pleasant first experience working abroad, so we have certain expectations for our prospective employers. These expectations have been laid out very clearly, and you will accept all of them if you are to use our service. We take violations of these terms very seriously. If we find that you have proposed a contract that violates any of these terms, we have the right to terminate this agreement. We will remove you from our system, we will add you to our blacklist, and you will not receive any reimbursement. Do you understand and accept this?",
-            choices=[('1', 'Yes, we understand and accept.'), 
-                ('0', "No, we are no longer interested in your service.")],
-            validators=[DataRequired()])
+    terms = SelectField("对于我们的许多申请人来说，这是他们第一次离开自己的国家。为了确保他们有愉快的初国外工作体验，我们为潜在的雇主制定了一些标准。这些标准已经非常清楚地列出，如果您要使用我们的服务，则将接受所有这些标准。我们非常重视违反这些条款的行为。如果我们发现您提出的合同违反了我们的任何条款，我们有权终止本协议。我们会将您从系统中删除，我们会将您添加到我们的黑名单中，并且您不会收到任何报销。您了解并接受吗？",
+            choices=[('1', '了解并接受。'), 
+                ('0', "我们不再对您的服务感兴趣。")],
+            validators=[DataRequired(message='抱歉，此字段不能为空。')])
 
     #recaptcha = RecaptchaField()
 
-    submit = SubmitField('Next >>')
+    submit = SubmitField('下一步 >>')
 
 
 # Custom validators for sign up forms
@@ -185,7 +185,7 @@ class USA_ApplicantSignup(FlaskForm):
     email = StringField('Email',
             validators=[DataRequired(), Length(max=70), Email()])
 
-    cell_phone = StringField('Cell number',
+    cell_phone = StringField('Cell phone number',
             validators=[DataRequired(), Length(min=10, max=10), phone_check])
 
     password = PasswordField('Password (minimum of 8 characters)',
@@ -313,17 +313,386 @@ class USA_ApplicantSignup(FlaskForm):
         ('105058', 'Yuba')],
         validators=[DataRequired(), california])
 
-    home_zip = StringField('ZIP Code',
+    home_zip = StringField('ZIP code',
             validators=[DataRequired(), Length(min=5, max=5), number_check])
 
     submit = SubmitField()
 
+def skype_check(form, field):
+    iffy = ['<','>','/',':',';','=','"',"'",'`','(',')','!','#', '*', '$', '%', '{','}','[',']','?','~']
+    for character in str(form.skype_id.data):
+        if character in iffy:
+            raise ValidationError("Your response contains characters that are not allowed.")
 
-#class USA_AffiliateSignup(FlaskForm):
-    #dfsdfs
+def address_check(form, field):
+    iffy = ['<','>','/',':',';','=','"',"'",'`','(',')','!', '*', '$', '%', '{','}','[',']','?','~']
+    for character in str(form.address_street.data):
+        if character in iffy:
+            raise ValidationError("Your response contains characters that are not allowed.")
 
-#class China_EmployerSignup(FlaskForm):
-    #dfsfds
+class USA_AffiliateSignup(FlaskForm):
+    
+    first_name = StringField('First name',
+            validators=[DataRequired(), Length(min=2,max=35), xss_first_name])
+    
+    last_name = StringField('Last name',
+            validators=[DataRequired(), Length(min=2,max=35), xss_last_name])
+    
+    email = StringField('Email',
+            validators=[DataRequired(), Email(), Length(max=70)])
+    
+    password = PasswordField('Password (minimum of 8 characters)',
+            validators=[DataRequired(), Length(min=8)])
+    
+    verify_password = PasswordField('Verify password',
+            validators=[DataRequired(), verify_password])
+    
+    cell_phone = StringField('Cell phone number',
+            validators=[DataRequired(), Length(min=10, max=10), phone_check])
+    
+    skype_id = StringField('Skype ID',
+            validators=[DataRequired(), Length(max=70), skype_check])
+    
+    paypal_email = StringField('PayPal email',
+            validators=[DataRequired(), Email(), Length(max=70)])
+    
+    home_street = StringField('Street address',
+            validators=[DataRequired(), Length(min=7, max=35), address_check])
+    
+    home_city = StringField('City',
+            validators=[DataRequired(), Length(min=3, max=22), xss_city])
+    
+    home_state = SelectField('State', choices=[
+        ('101000', 'Alabama'),
+        ('102000', 'Alaska'),
+        ('103000', 'Arizona'),
+        ('104000', 'Arkansas'),
+        ('105000', 'California'),
+        ('106000', 'Colorado'),
+        ('107000', 'Connecticut'),
+        ('108000', 'Delaware'),
+        ('109000', 'District of Columbia'),
+        ('110000', 'Florida'),
+        ('111000', 'Georgia'),
+        ('112000', 'Hawaii'),
+        ('113000', 'Idaho'),
+        ('114000', 'Illinois'),
+        ('115000', 'Indiana'),
+        ('116000', 'Iowa'),
+        ('117000', 'Kansas'),
+        ('118000', 'Kentucky'),
+        ('119000', 'Lousiana'),
+        ('120000', 'Maine'),
+        ('121000', 'Maryland'),
+        ('122000', 'Massachusetts'),
+        ('123000', 'Michigan'),
+        ('124000', 'Minnesota'),
+        ('125000', 'Mississippi'),
+        ('126000', 'Missouri'),
+        ('127000', 'Montana'),
+        ('128000', 'Nebraska'),
+        ('129000', 'Nevada'),
+        ('130000', 'New Hampshire'),
+        ('131000', 'New Jersey'),
+        ('132000', 'New Mexico'),
+        ('133000', 'New York'),
+        ('134000', 'North Carolina'),
+        ('135000', 'North Dakota'),
+        ('136000', 'Ohio'),
+        ('137000', 'Oklahoma'),
+        ('138000', 'Oregon'),
+        ('139000', 'Pennsylvania'),
+        ('140000', 'Rhode Island'),
+        ('141000', 'South Carolina'),
+        ('142000', 'South Dakota'),
+        ('143000', 'Tennessee'),
+        ('144000', 'Texas'),
+        ('145000', 'Utah'),
+        ('146000', 'Vermont'),
+        ('147000', 'Virginia'),
+        ('148000', 'Washington'),
+        ('149000', 'West Virginia'),
+        ('150000', 'Wisconsin'),
+        ('151000', 'Wyoming')],
+        validators=[DataRequired()])
+    
+    ca_county = SelectField('California residents: What county do you live in? (If you do not live in California, choose "Not applicable -- I do not live in California."', choices=[
+        ('NA', 'Not applicable -- I do not live in California.'),
+        ('105001', 'Alameda'),
+        ('105002', 'Alpine'),
+        ('105003', 'Amador'),
+        ('105004', 'Butte'),
+        ('105005', 'Calaveras'),
+        ('105006', 'Colusa'),
+        ('105007', 'Contra Costa'),
+        ('105008', 'Del Norte'),
+        ('105009', 'El Dorado'),
+        ('105010', 'Fresno'),
+        ('105011', 'Glenn'),
+        ('105012', 'Humboldt'),
+        ('105013', 'Imperial'),
+        ('105014', 'Inyo'),
+        ('105015', 'Kern'),
+        ('105016', 'Kings'),
+        ('105017', 'Lake'),
+        ('105018', 'Lassen'),
+        ('105019', 'Los Angeles'),
+        ('105020', 'Madera'),
+        ('105021', 'Marin'),
+        ('105022', 'Mariposa'),
+        ('105023', 'Mendocino'),
+        ('105024', 'Merced'),
+        ('105025', 'Modoc'),
+        ('105026', 'Mono'),
+        ('105027', 'Monterey'),
+        ('105028', 'Napa'),
+        ('105029', 'Nevada'),
+        ('105030', 'Orange'),
+        ('105031', 'Placer'),
+        ('105032', 'Plumas'),
+        ('105033', 'Riverside'),
+        ('105034', 'Sacramento'),
+        ('105035', 'San Benito'),
+        ('105036', 'San Bernardino'),
+        ('105037', 'San Diego'),
+        ('105038', 'San Francisco'),
+        ('105039', 'San Joaquin'),
+        ('105040', 'San Luis Obispo'),
+        ('105041', 'San Mateo'),
+        ('105042', 'Santa Barbara'),
+        ('105043', 'Santa Clara'),
+        ('105044', 'Santa Cruz'),
+        ('105045', 'Shasta'),
+        ('105046', 'Sierra'),
+        ('105047', 'Siskiyou'),
+        ('105048', 'Solano'),
+        ('105049', 'Sonoma'),
+        ('105050', 'Stanislaus'),
+        ('105051', 'Sutter'),
+        ('105052', 'Tehama'),
+        ('105053', 'Trinity'),
+        ('105054', 'Tulare'),
+        ('105055', 'Tuolumne'),
+        ('105056', 'Ventura'),
+        ('105057', 'Yolo'),
+        ('105058', 'Yuba')],
+        validators=[DataRequired(), california])
+
+    home_zip = StringField('ZIP code',
+            validators=[DataRequired(), Length(min=5,max=5), number_check])
+    
+    # recaptcha
+    
+    submit = SubmitField()
+
+def province_check(form, field):
+    if form.address_province.data == '113000' or form.address_province.data == '121000' or form.address_province.data == '129000':
+        raise ValidationError('您所在省的簽證要求與中國大陸不同。因此，我們目前無法接受您的申請，感謝您的理解。')
+        # Your province's visa app requirements are different from Mainland China, so we cannot your application. Thanks for understanding.
+
+    elif form.address_province.data == '131000' or form.address_province.data == '132000':
+        raise ValidationError('因为您所在自治区目前政治敏感性非常高，所以我们的外教很难在您所在地区申请工作签证。因此，我们公司选择不接受您所在自治区的学校申请，感谢您的理解。')
+        # Your autonomous region is currently very politically sensitive, so it is hard for our teachers to get work visas. Therefore, we have chosen not to accept applications from schools in your auto region, thanks for understanding.
+
+def school_name_chi_check(form, field):
+    iffy = ['A', 'B', 'C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z',
+            'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z',
+            '~','`','1','!','2','@','3','#','4','$','5','%','6','^','7','&','8','*','9','(','0',')','-','_','+','=','[','{',']','}',
+            ':',';','"',"'",'|','<',',','.','>','?','/']
+    for character in str(form.school_name_chi.data):
+        if character in iffy:
+            raise ValidationError("仅输入中文字。")
+
+def school_name_eng_check(form, field):
+    iffy = ['<','>','/',':',';','=','"',"'",'`','(',')','!','#', '*', '$', '%', '{','}','[',']','?','~']
+    for character in str(form.school_name_eng.data):
+        if character in iffy:
+            raise ValidationError("抱歉，您不能输入这符号 -- {}。".format(character))
+
+def password_check(form, field):
+    if form.password.data != form.verify_password.data:
+        raise ValidationError("两个密码不匹配!")
+
+def chi_phone_check(form, field):
+    numbers = ['0','1','2','3','4','5','6','7','8','9']
+    for character in str(form.cell_phone.data):
+        if character not in numbers:
+            raise ValidationError('仅输入数字')
+
+def representative_name_check(form, field):
+    iffy = ['<','>','/',':', ';', '=', '"', '`', '(', ')', '!', '#', '*', '$', '%', '{', '}', '[', ']', '?', '~']
+    for character in str(form.representative_name.data):
+        if character in iffy:
+            raise ValidationError("抱歉，您不能输入这符号 -- {}。".format(character))
+
+def edu_jurisdiction_check(form, field):
+    iffy = ['A', 'B', 'C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z',
+            'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z',
+            '~','`','1','!','2','@','3','#','4','$','5','%','6','^','7','&','8','*','9','(','0',')','-','_','+','=','[','{',']','}',
+            ':',';','"',"'",'|','<',',','.','>','?','/']
+    for character in str(form.edu_jurisdiction.data):
+        if character in iffy:
+            raise ValidationError("仅输入中文字。")
+
+def edu_license_number_check(form, field):
+    iffy = ['<','>','/',':',';','=','"',"'",'`','(',')','!','#', '*', '$', '%', '{','}','[',']','?','~']
+    for character in str(form.edu_license_number.data):
+        if character in iffy:
+            raise ValidationError("抱歉，您不能输入这符号 -- {}。".format(character))
+
+def address_city_check(form, field):
+    iffy = ['A', 'B', 'C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z',
+            'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z',
+            '~','`','1','!','2','@','3','#','4','$','5','%','6','^','7','&','8','*','9','(','0',')','-','_','+','=','[','{',']','}',
+            ':',';','"',"'",'|','<',',','.','>','?','/']
+    for character in str(form.address_city.data):
+        if character in iffy:
+            raise ValidationError("仅输入中文字。")
+
+def address_street_check(form, field):
+    iffy = ['A', 'B', 'C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z',
+            'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z',
+            '~','`','1','!','2','@','3','#','4','$','5','%','6','^','7','&','8','*','9','(','0',')','-','_','+','=','[','{',']','}',
+            ':',';','"',"'",'|','<',',','.','>','?','/']
+    for character in str(form.address_street.data):
+        if character in iffy:
+            raise ValidationError("仅输入中文字。")
+
+def social_credit_check(form, field):
+    iffy = ['<','>','/',':',';','=','"',"'",'`','(',')','!','#', '*', '$', '%', '{','}','[',']','?','~']
+    for character in str(form.social_credit_number.data):
+        if character in iffy:
+            raise ValidationError("抱歉，您不能输入这符号 -- {}。".format(character))
+
+class China_EmployerSignup(FlaskForm):
+
+    school_name_chi = StringField('学校名称（中文）',
+            validators=[DataRequired(message='抱歉，此字段不能为空。'),
+                Length(min=5, max=30, message='抱歉，您的回复必须在5和30个字符之间。'),
+                school_name_chi_check])
+
+    school_name_eng = StringField('学校名称（英文）',
+            validators=[DataRequired(message='抱歉，此字段不能为空。'),
+                Length(min=10, max=100, message='抱歉，您的回复必须在10和100个字符之间。'),
+                school_name_eng_check])
+
+    email = StringField('邮箱',
+            validators=[DataRequired(message='抱歉，此字段不能为空。'), 
+                Length(max=70, message='抱歉，您的回复太长。'), 
+                Email(message='抱歉，您没有输入有效的电子邮件地址。')])
+
+    password = PasswordField('密码（至少8字符）',
+            validators=[DataRequired(message='抱歉，此字段不能为空。'),
+                Length(min=8, message='抱歉，您的密码必须至少8个字符长。')])
+
+    verify_password = PasswordField('确认密码',
+            validators=[DataRequired(message='抱歉，此字段不能为空。'),
+                password_check])
+
+    cell_phone = StringField('代表人手机号码',
+            validators=[DataRequired(message='抱歉，此字段不能为空。'),
+                Length(min=11, max=11, message='抱歉，您的回复必须为11个字符长。'),
+                chi_phone_check])
+
+    landline_phone = StringField('座机电话号码',
+            validators=[DataRequired(message='抱歉，此字段不能为空。'),
+                Length(min=11, max=11, message='抱歉，您的回复必须为11个字符长。'),
+                chi_phone_check])
+
+    representative_name = StringField('代表人姓名',
+            validators=[DataRequired(message='抱歉，此字段不能为空。'),
+                Length(min=2, max=70, message='抱歉，您的回复必须在2和70个字符之间。'),
+                representative_name_check])
+
+    edu_jurisdiction = StringField('教育主管部门',
+            validators=[DataRequired(message='抱歉，此字段不能为空。'),
+                Length(min=2, max=10, message='抱歉，您的回复必须在2和10个字符之间。'),
+                edu_jurisdiction_check])
+
+    edu_license_number = StringField('中华人民共和国民办学校办学许可证教民号',
+            validators=[DataRequired(message='抱歉，此字段不能为空。'),
+                Length(min=15, max=15, message='抱歉，您的回复必须为15个字符长。'),
+                edu_license_number_check])
+
+    edu_license_exp_date = DateField('办学许可证失效日期',
+            validators=[DataRequired(message='抱歉，此字段不能为空。')])
+    # Need another pass
+
+    business_type = SelectField('营业类型', choices=[
+        ('01', '有限责任公司'),     # Limited liability company
+        ('02', '股份有限公司'),     # Joint-stock company
+        ('03', '有限合伙企业'),     # Limited partnership
+        ('04', '外商独资公司'),     # Wholly foreign owned company
+        ('05', '个人独资企业'),     # Individual proprietorship
+        ('06', '国有独资公司'),     # Wholly state-owned company
+        ('07', '其他')],            # Other
+        validators=[DataRequired(message='抱歉，此字段不能为空。')])
+
+    established_date = DateField('成立日期',
+            validators=[DataRequired(message='抱歉，此字段不能为空。')])
+    #Need another pass
+
+    address_province = SelectField('地址（省）', choices=[
+        ('101000', '安徽省'),           # Anhui
+        ('102000', '北京市'),           # Beijing
+        ('103000', '重庆市'),           # Chongqing
+        ('104000', '福建省'),           # Fujian
+        ('105000', '甘肃省'),           # Gansu
+        ('106000', '广东省'),           # Guangdong
+        ('107000', '广西壮族自治区'),   # Guangxi 
+        ('108000', '贵州省'),           # Guizhou
+        ('109000', '海南省'),           # Hainan
+        ('110000', '河北省'),           # Hebei
+        ('111000', '黑龙江省'),         # Heilongjiang
+        ('112000', '河南省'),           # Henan
+        ('113000', '香港特别行政区'),   # Hong Kong -- throws "different visa system" error
+        ('114000', '湖北省'),           # Hubei
+        ('115000', '湖南省'),           # Hunan
+        ('116000', '內蒙古自治区'),     # Inner Mongolia
+        ('117000', '江苏省'),           # Jiangsu
+        ('118000', '江西省'),           # Jiangxi
+        ('119000', '吉林省'),           # Jilin
+        ('120000', '辽宁省'),           # Liaoning
+        ('121000', '澳门特别行政区'),   # Macau -- throws "different visa system" error
+        ('122000', '宁夏回族自治区'),   # Ningxia
+        ('123000', '青海省'),           # Qinghai
+        ('124000', '陕西省'),           # Shaanxi
+        ('125000', '山东省'),           # Shandong
+        ('126000', '上海市'),           # Shanghai
+        ('127000', '山西省'),           # Shandong
+        ('128000', '四川省'),           # Sichuan
+        ('129000', '台湾省'),           # Taiwan -- throws "different visa system" error
+        ('130000', '天津市'),           # Tianjin
+        ('131000', '西藏自治区'),       # Tibet -- throws "politically sensitive" error
+        ('132000', '新疆维吾尔自治区'), # Xinjiang -- throws "politically sensitive" error
+        ('133000', '云南省'),           # Yunnan
+        ('134000', '浙江省')],          # Zhejiang
+        validators=[DataRequired(message='抱歉，此字段不能为空。'), 
+            province_check])
+
+    address_city = StringField('地址（市）',
+            validators=[DataRequired(message='抱歉，此字段不能为空。'),
+                Length(min=2, max=10, message='抱歉，您的回复必须在2和10个字符之间。'),
+                address_city_check])
+
+    address_street = StringField('地址',
+            validators=[DataRequired(message='抱歉，此字段不能为空。'),
+                Length(min=5, max=30, message='抱歉，您的回复必须在5和30个字符之间。'),
+                address_street_check])
+
+    social_credit_number = StringField('统一社会信用代码',
+            validators=[DataRequired(message='抱歉，此字段不能为空。'),
+                Length(min=18, max=18, message='抱歉，您的回复必须为18个字符长。'),
+                social_credit_check])
+
+    business_license_exp_date = DateField('营业执照失效日期',
+            validators=[DataRequired(message='抱歉，此字段不能为空。')])
+    # Need another pass
+
+    # recaptcha? (does it even fucking work in china???)
+
+    submit = SubmitField()
+
 
 #class China_AffiliateSignup(FlaskForm):
     #dfsdfs
