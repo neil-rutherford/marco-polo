@@ -1,0 +1,123 @@
+{% extends "signup_base.html" %}
+
+{% block content %}
+<h1>Sign Up</h1>
+<form action="" method="post" novalidate>
+	{{ form.hidden_tag() }}
+	<p>
+		{{ form.first_name.label }}<br>
+		{{ form.first_name(size=32) }}<br>
+		{% for error in form.first_name.errors %}
+		<span style="color: red;">[{{ error }}]</span>
+
+		{% endfor %}
+	</p>
+	<p>
+		{{ form.last_name.label }}<br>
+		{{ form.last_name(size=32) }}<br>
+		{% for error in form.last_name.errors %}
+		<span style="color: red;">[{{ error }}]</span>
+
+		{% endfor %}
+	</p>
+	<p>
+		{{ form.dob.label }}<br>
+		{{ form.dob(size=32) }}<br>
+		{% for error in form.dob.errors %}
+		<span style="color: red;">[{{ error }}]</span>
+
+		{% endfor %}
+	</p>
+	<p>
+		{{ form.email.label }}<br>
+		{{ form.email(size=32) }}<br>
+		{% for error in form.email.errors %}
+		<span style="color: red;">[{{ error }}]</span>
+
+		{% endfor %}
+	</p>
+	<p>
+		{{ form.password.label }}<br>
+		{{ form.password(size=32) }}<br>
+		{% for error in form.password.errors %}
+		<span style="color: red;">[{{ error }}]</span>
+
+		{% endfor %}
+	</p>
+	<p>
+		{{ form.verify_password.label }}<br>
+		{{ form.verify_password(size=32) }}<br>
+		{% for error in form.verify_password.errors %}
+		<span style="color: red;">[{{ error }}]</span>
+
+		{% endfor %}
+	</p>
+	<p>
+		{{ form.cell_phone.label }}<br>
+		{{ form.cell_phone(size=32) }}<br>
+		{% for error in form.cell_phone.errors %}
+		<span style="color: red;">[{{ error }}]</span>
+
+		{% endfor %}
+	</p>
+	<p>
+		{{ form.skype_id.label }}<br>
+		{{ form.skype_id(size=32) }}<br>
+		{% for error in form.skype_id.errors %}
+		<span style="color: red;">[{{ error }}]</span>
+
+		{% endfor %}
+	</p>
+	<p>
+		{{ form.paypal_email.label }}<br>
+		{{ form.paypal_email(size=32) }}<br>
+		{% for error in form.paypal_email.errors %}
+		<span style="color: red;">[{{ error }}]</span>
+
+		{% endfor %}
+	</p>
+	<p>
+		{{ form.home_street.label }}<br>
+		{{ form.home_street(size=32) }}<br>
+		{% for error in form.home_street.errors %}
+		<span style="color: red;">[{{ error }}]</span>
+
+		{% endfor %}
+	</p>
+	<p>
+		{{ form.home_city.label }}<br>
+		{{ form.home_city(size=32) }}<br>
+		{% for error in form.home_city.errors %}
+		<span style="color: red;">[{{ error }}]</span>
+
+		{% endfor %}
+	</p>
+	<p>
+		{{ form.home_state.label }}<br>
+		{{ form.home_state(size=32) }}<br>
+		{% for error in form.home_state.errors %}
+		<span style="color: red;">[{{ error }}]</span>
+
+		{% endfor %}
+	</p>
+	<p>
+		{{ form.ca_county.label }}<br>
+		{{ form.ca_county(size=32) }}<br>
+		{% for error in form.ca_county.errors %}
+		<span style="color: red;">[{{ error }}]</span>
+
+		{% endfor %}
+	</p>
+	<p>
+		{{ form.home_zip.label }}<br>
+		{{ form.home_zip(size=32) }}<br>
+		{% for error in form.home_zip.errors %}
+		<span style="color: red;">[{{ error }}]</span>
+
+		{% endfor %}
+	</p>
+	<p>{{ form.submit() }}</p>
+</form>
+
+<p>By clicking the submit button, you agree to our <a href="{{ url_for('signup.terms_usa_affiliate') }}">terms and data policy</a>.</p>
+{% endblock %}

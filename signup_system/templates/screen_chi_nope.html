@@ -1,25 +1,25 @@
 {% extends "signup_base.html" %}
 
 {% block content %}
-<h1>We're Sorry...</h1>
+<h1>抱歉...</h1>
 
-<p>...but we're stopping you here because you don't qualify for our program. Trust us, it's better this way. We just don't want you to spend thousands of dollars and then find out that you've been blacklisted and not receive a refund. Nothing against you personally!</p>
+<p>...我们在这里阻止您因为您没有资格参加我们的项目。相信我们，这样更好。 我们只是不想让您花费数千美元，然后发现您已被列入黑名单和无法获得退款。 没什么可害您的！</p>
 
-<p>Here are some possible reasons why you don't qualify:</p>
+<p>以下是您不符合条件的一些可能原因：</p>
 <ul>
-	<li><b>You are not allowed to employ foreigners.</b> This could be because you don't have a business license, an education license, or both.</li><br>
-	<li><b>You are not committed to legal employment.</b> This could be because you didn't agree to provide your foreign workers with Z visas, because you didn't agree to follow labor laws, or because you don't want to provide medical insurance.</li><br>
-	<li><b>You want a contract that lasts for less than one year.</b> We hope to provide you with full-time employees that have contracts lengths of at least a year.</li><br>
-	<li><b>You want your employee to work more than 9 hours a day.</b> We understand that businesses may sometimes require their employees to work overtime, but 996 business models are not fair to employees. Foreign workers are accustomed to 40-hour workweeks with additional compensation for overtime.</li><br>
-	<li><b>You can't afford a foreign teacher.</b> To qualify for a tier B work visa, foreign employees need to meet certain salary requirements. In addition, they need to make a certain amount of money to justify leaving their friends and family back home. Finally, agreeing to a minimum salary shows that you are operating in good faith.</li><br>
-	<li><b>You can't guarantee that you will pay your employees on time.</b> If you can't pay your employees on time, you shouldn't be running a business.</li><br>
-	<li><b>You want to pay your employees in cash.</b> Cash payments are a red flag and hint at criminal activity and/or tax evasion.</li><br>
-	<li><b>You don't want to provide your foreign employee with a standard benefits package.</b> This could be because you don't want to provide airfare, housing, or vacation time.</li><br>
-	<li><b>You don't want to have a bilingual contract.</b></li><br>
-	<li><b>You didn't accept our terms.</b> Guess we'll just have to agree to disagree, eh?</li><br>
+	<li><b>您不得雇用外国人。</b> 这可能是因为您没有营业执照或者办学校办学许可证。</li><br>
+	<li><b>您不致力于合法雇用。</b> 这可能是因为您不同意向外籍教师提供Z签证，是因为您不同意遵守劳动法，或者是因为您不想提供医疗保险。</li><br>
+	<li><b>您希望合同期限少于一年。</b> 我们希望为您提供合同期至少一年的全职员工。</li><br>
+	<li><b>您希望您的外国员工每天工作9个小时以上。</b> 我们了解，企业有时可能会要求员工加班，但是996种业务模式对员工不公平。 外国人习惯于每周工作40小时，加班要收加班费。</li><br>
+	<li><b>你付不起外国老师的薪水。</b> 要获得B级工作签证的资格，外籍员工需要满足一定的薪水要求。 同意最低工资也表明您的经营真诚。</li><br>
+	<li><b>您无法保证会按时向您的员工付款。</b></li><br>
+	<li><b>您想用现金支付您的员工。</b> 现金支付是一个危险信号，暗示犯罪活动和逃税。</li><br>
+	<li><b>您不想为您的外籍员工提供标准的福利待遇。</b> 这可能是因为您不想提供机票，住房或休假时间。</li><br>
+	<li><b>您觉得双语合同不重要。</b></li><br>
+	<li><b>您没有接受我们的使用条款。</b></li><br>
 </ul>
 
-<p>If you believe there was a mistake, click <a href="{{ url_for('signup.screen_china_employer') }}">here</a> to complete the questionnaire again.</p>
-<p>Otherwise, we're sorry to see you go and wish you all the best finding a foreign teacher. Thank you for understanding.</p>
+<p>如果您认为有误，请点击<a href="{{ url_for('signup.screen_china_employer') }}">此处</a>再次填写筛选表。</p>
+<p>否则，我们看到您离开很伤心，并祝您找到一位外国老师顺利。 谢谢您的理解。</p>
 
 {% endblock %}

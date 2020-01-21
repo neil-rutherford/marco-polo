@@ -1,0 +1,155 @@
+{% extends "signup_base.html" %}
+
+{% block content %}
+<h1>注册</h1>
+<form action="" method="post" novalidate>
+	{{ form.hidden_tag() }}
+	<p>
+		{{ form.school_name_chi.label }}<br>
+		{{ form.school_name_chi(size=32) }}<br>
+		{% for error in form.school_name_chi.errors %}
+		<span style="color: red;">[{{ error }}]</span>
+
+		{% endfor %}
+	</p>
+	<p>
+		{{ form.school_name_eng.label }}<br>
+		{{ form.school_name_eng(size=32) }}<br>
+		{% for error in form.school_name_eng.errors %}
+		<span style="color: red;">[{{ error }}]</span>
+
+		{% endfor %}
+	</p>
+	<p>
+		{{ form.email.label }}<br>
+		{{ form.email(size=32) }}<br>
+		{% for error in form.email.errors %}
+		<span style="color: red;">[{{ error }}]</span>
+
+		{% endfor %}
+	</p>
+	<p>
+		{{ form.password.label }}<br>
+		{{ form.password(size=32) }}<br>
+		{% for error in form.password.errors %}
+		<span style="color: red;">[{{ error }}]</span>
+
+		{% endfor %}
+	</p>
+	<p>
+		{{ form.verify_password.label }}<br>
+		{{ form.verify_password(size=32) }}<br>
+		{% for error in form.verify_password.errors %}
+		<span style="color: red;">[{{ error }}]</span>
+
+		{% endfor %}
+	</p>
+	<p>
+		{{ form.cell_phone.label }}<br>
+		{{ form.cell_phone(size=32) }}<br>
+		{% for error in form.cell_phone.errors %}
+		<span style="color: red;">[{{ error }}]</span>
+
+		{% endfor %}
+	</p>
+	<p>
+		{{ form.landline_phone.label }}<br>
+		{{ form.landline_phone(size=32) }}<br>
+		{% for error in form.landline_phone.errors %}
+		<span style="color: red;">[{{ error }}]</span>
+
+		{% endfor %}
+	</p>
+	<p>
+		{{ form.representative_name.label }}<br>
+		{{ form.representative_name(size=32) }}<br>
+		{% for error in form.representative_name.errors %}
+		<span style="color: red;">[{{ error }}]</span>
+
+		{% endfor %}
+	</p>
+	<p>
+		{{ form.edu_jurisdiction.label }}<br>
+		{{ form.edu_jurisdiction(size=32) }}<br>
+		{% for error in form.edu_jurisdiction.errors %}
+		<span style="color: red;">[{{ error }}]</span>
+
+		{% endfor %}
+	</p>
+	<p>
+		{{ form.edu_license_number.label }}<br>
+		{{ form.edu_license_number(size=32) }}<br>
+		{% for error in form.edu_license_number.errors %}
+		<span style="color: red;">[{{ error }}]</span>
+
+		{% endfor %}
+	</p>
+	<p>
+		{{ form.edu_license_exp_date.label }}<br>
+		{{ form.edu_license_exp_date(size=32) }}<br>
+		{% for error in form.edu_license_exp_date.errors %}
+		<span style="color: red;">[{{ error }}]</span>
+
+		{% endfor %}
+	</p>
+	<p>
+		{{ form.business_type.label }}<br>
+		{{ form.business_type(size=32) }}<br>
+		{% for error in form.business_type.errors %}
+		<span style="color: red;">[{{ error }}]</span>
+
+		{% endfor %}
+	</p>
+	<p>
+		{{ form.established_date.label }}<br>
+		{{ form.established_date(size=32) }}<br>
+		{% for error in form.established_date.errors %}
+		<span style="color: red;">[{{ error }}]</span>
+
+		{% endfor %}
+	</p>
+	<p>
+		{{ form.address_province.label }}<br>
+		{{ form.address_province(size=32) }}<br>
+		{% for error in form.address_province.errors %}
+		<span style="color: red;">[{{ error }}]</span>
+
+		{% endfor %}
+	</p>
+	<p>
+		{{ form.address_city.label }}<br>
+		{{ form.address_city(size=32) }}<br>
+		{% for error in form.address_city.errors %}
+		<span style="color: red;">[{{ error }}]</span>
+
+		{% endfor %}
+	</p>
+	<p>
+		{{ form.address_street.label }}<br>
+		{{ form.address_street(size=32) }}<br>
+		{% for error in form.address_street.errors %}
+		<span style="color: red;">[{{ error }}]</span>
+
+		{% endfor %}
+	</p>
+	<p>
+		{{ form.social_credit_number.label }}<br>
+		{{ form.social_credit_number(size=32) }}<br>
+		{% for error in form.social_credit_number.errors %}
+		<span style="color: red;">[{{ error }}]</span>
+
+		{% endfor %}
+	</p>
+	<p>
+		{{ form.business_license_exp_date.label }}<br>
+		{{ form.business_license_exp_date(size=32) }}<br>
+		{% for error in form.business_license_exp_date.errors %}
+		<span style="color: red;">[{{ error }}]</span>
+
+		{% endfor %}
+	</p>
+	<p>{{ form.submit() }}</p>
+</form>
+
+<p>点击提交按钮，即表示您同意我们的<a href="{{ url_for('signup.terms_china_employer') }}">使用条款和我们的数据政策</a>。</p>
+{% endblock %}

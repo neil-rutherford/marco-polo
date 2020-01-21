@@ -1,7 +1,161 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, SelectField, PasswordField, DateField, SubmitField
 from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError
+import datetime
 
+
+####################
+# //-- CONTENTS --\\
+####################
+
+# 1. CUSTOM VALIDATORS
+# 2. USA APPLICANT SCREEN
+# 3. CHINA EMPLOYER SCREEN
+# 4. USA APPLICANT SIGNUP
+# 5. CHINA EMPLOYER SIGNUP
+# 6. USA AFFILIATE SIGNUP
+# 7. CHINA AFFILIATE SIGNUP
+
+
+#############################################################
+# //////////---------- CUSTOM VALIDATORS ----------\\\\\\\\\\
+#############################################################
+
+#######################################
+# //-- ENGLISH LANGUAGE VALIDATORS --\\
+#######################################
+
+def ENG_no_symbols(form, field):
+    iffy = ['<','>','/',':', ';', '=', '"', '`', '(', ')', '!', '#', '*', '$', '%', '{', '}', '[', ']', '?', '~']
+    for character in str(field.data):
+        if character in iffy:
+            raise ValidationError("Your response contains characters that are not allowed.")
+
+def ENG_phone_check(form, field):
+    numbers = ['0','1','2','3','4','5','6','7','8','9']
+    for character in str(field.data):
+        if character == '-':
+            raise ValidationError("We're expecting something like 1112223333, not 111-222-3333.")
+        elif character not in numbers:
+            raise ValidationError('Numbers only, please.')
+
+def ENG_password_check(form, field):
+    if form.password.data != form.verify_password.data:
+        raise ValidationError('Passwords must match.')
+
+def ENG_california_check(form, field):
+    if form.home_state.data == '105000' and form.ca_county.data == 'NA':
+        raise ValidationError('Two embassies service California, so we need to know what county you live in.')
+    elif form.home_state.data != '105000' and form.ca_county.data != 'NA':
+        raise ValidationError('County clarification is only required for California residents. If you are not from California, please select "Not Applicable".')
+
+def ENG_dob_check(form, field):
+    age = datetime.date.today() - field.data
+    if age < datetime.timedelta(days=6570):
+        raise ValidationError('You cannot work for us because you are not 18 years old.')
+
+#######################################
+# //-- CHINESE LANGUAGE VALIDATORS --\\
+#######################################
+
+def CHI_hanzi_only(form, field):
+    '''
+    FUNCTION:       Only Chinese characters are allowed. No English letters, no symbols, and no numbers.
+    ERROR MESSAGE:  Only Chinese characters are allowed.
+    '''
+    iffy = ['A', 'B', 'C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z',
+            'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z',
+            '~','`','1','!','2','@','3','#','4','$','5','%','6','^','7','&','8','*','9','(','0',')','-','_','+','=','[','{',']','}',
+            ':',';','"',"'",'|','<',',','.','>','?','/']
+    for character in str(field.data):
+        if character in iffy:
+            raise ValidationError("仅输入中文字。")
+
+def CHI_no_symbols(form, field):
+    '''
+    FUNCTION:       English letters and numbers are allowed, but no symbols.
+    ERROR MESSAGE:  Sorry, your response contains symbols that are not allowed.
+    '''
+    iffy = ['<','>','/',':',';','=','"',"'",'`','(',')','!','#', '*', '$', '%', '{','}','[',']','?','~']
+    for character in str(field.data):
+        if character in iffy:
+            raise ValidationError("抱歉，您的回复中包含不允许的符号。")
+
+def CHI_password_check(form, field):
+    '''
+    FUNCTION:       EqualTo was displaying stdout errors in the browser, so I made my own.
+    ERROR MESSAGE:  The two passwords do not match!
+    '''
+    if form.password.data != form.verify_password.data:
+        raise ValidationError('两个密码不匹配!')
+
+def CHI_phone_check(form, field):
+    '''
+    FUNCTION:       Numbers only.
+    ERROR MESSAGE:  You are only allowed to enter numbers.
+    '''
+    numbers = ['0','1','2','3','4','5','6','7','8','9']
+    for character in str(field.data):
+        if character not in numbers:
+            raise ValidationError('仅输入数字')
+
+def CHI_province_check(form, field):
+    '''
+    IF FUNCTION:    Catches addresses in Hong Kong, Macau, and Taiwan.
+    ERROR MESSAGE:  The visa process in your province is different from Mainland China. Therefore, we currently cannot accept your application. Thank you for your understanding.
+    
+    ELIF FUNCTION:  Catches addresses in Xinjiang and Tibet.
+    ERROR MESSAGE:  Your area is currently very politically sensitive, so foreigners have a hard time applying for visas in your area. Therefore, we have chosen not to accept applications from schools in your area. Thank you for your understanding.
+    '''
+    if form.address_province.data == '113000' or form.address_province.data == '121000' or form.address_province.data == '129000':
+        raise ValidationError('您所在省的簽證要求與中國大陸不同。因此，我們目前無法接受您的申請，感謝您的理解。')
+    elif form.address_province.data == '131000' or form.address_province.data == '132000':
+        raise ValidationError('因为您所在自治区目前政治敏感性非常高，所以我们的外教很难在您所在地区申请工作签证。因此，我们公司选择不接受您所在自治区的学校申请，感谢您的理解。')
+
+def CHI_address_check(form, field):
+    '''
+    FUNCTION:       No English letters or symbols.
+    ERROR MESSAGE:  You are only allowed to enter Chinese characters and numbers.
+    '''
+    iffy = ['A', 'B', 'C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z',
+            'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z',
+            '~','`','!','@','#','$','%','^','&','*','(',')','-','_','+','=','[','{',']','}',
+            ':',';','"',"'",'|','<',',','.','>','?','/']
+    for character in str(field.data):
+        if character in iffy:
+            raise ValidationError("仅输入中文字和数字。")
+
+def CHI_exp_date_check(form, field):
+    '''
+    FUNCTION:       Checks to see if it's already expired.
+    ERROR MESSAGE:  You cannot enter expired information.
+    '''
+    time_left = field.data - datetime.date.today()
+    if time_left < datetime.timedelta(days=0):
+        raise ValidationError('不能输入已过期的信息。')
+
+def CHI_est_date_check(form, field):
+    '''
+    FUNCTION:       Checks to see if the establishment date is in the future.
+    ERROR MESSAGE:  Companies that have not yet been founded cannot use our service.
+    '''
+    time_since = datetime.date.today() - field.data
+    if time_since < datetime.timedelta(days=0):
+        raise ValidationError('未成立的公司不能用我们的服务。')
+
+def CHI_dob_check(form, field):
+    '''
+    FUNCTION:       Checks to see if affiliate is at least 18 years old.
+    ERROR MESSAGE:  In accordance with Chinese laws, you must be at least 18 years old to work for us.
+    '''
+    age = datetime.date.today() - field.data
+    if age < datetime.timedelta(days=6570):
+        raise ValidationError('根据中国法律，您必须年满18岁才能为我们工作。')
+
+
+################################################################
+# //////////---------- USA APPLICANT SCREEN ----------\\\\\\\\\\
+################################################################
 
 class USA_ApplicantScreen(FlaskForm):
         
@@ -43,6 +197,10 @@ class USA_ApplicantScreen(FlaskForm):
 
     submit = SubmitField('Next >>')
 
+
+#################################################################
+# //////////---------- CHINA EMPLOYER SCREEN ----------\\\\\\\\\\
+#################################################################
 
 class China_EmployerScreen(FlaskForm):
     
@@ -131,71 +289,44 @@ class China_EmployerScreen(FlaskForm):
     submit = SubmitField('下一步 >>')
 
 
-# Custom validators for sign up forms
-def phone_check(form, field):
-    numbers = ['0','1','2','3','4','5','6','7','8','9']
-    for character in str(form.cell_phone.data):
-        if character == '-':
-            raise ValidationError("We're expecting something like 1112223333, not 111-222-3333.")
-        elif character not in numbers:
-            raise ValidationError('Numbers only, please!')
-
-def number_check(form, field):
-    numbers = ['0','1','2','3','4','5','6','7','8','9']
-    for character in str(form.home_zip.data):
-        if character not in numbers:
-            raise ValidationError('Numbers only, please!')
-
-def california(form, field):
-    if form.home_state.data == '105000' and form.ca_county.data == 'NA':
-        raise ValidationError('Two embassies service California, so we need to know what county you live in.')
-    elif form.home_state.data != '105000' and form.ca_county.data != 'NA':
-        raise ValidationError('County clarification is only required for California residents. If you are not from California, please select "Not Applicable".')
-
-def verify_password(form, field):
-    if form.password.data != form.verify_password.data:
-        raise ValidationError('Passwords must match.')
-
-def xss_first_name(form, field):
-    iffy = ['<','>','/',':', ';', '=', '"', '`', '(', ')', '!', '#', '*', '$', '%', '{', '}', '[', ']', '?', '~']
-    for character in str(form.first_name.data):
-        if character in iffy:
-            raise ValidationError("Interesting name you've got there! What sound does that symbol make?")
-
-def xss_last_name(form, field):
-    iffy = ['<','>','/',':',';','=','"',"'",'`','(',')','!','#', '*', '$', '%', '{','}','[',']','?','~']
-    for character in str(form.last_name.data):
-        if character in iffy:
-            raise ValidationError("Interesting name you've got there! Is that Indonesian?")
-
-def xss_city(form, field):
-    iffy = ['<','>','/',':',';','=','"',"'",'`','(',')','!','#', '*', '$', '%', '{','}','[',']','?','~']
-    for character in str(form.home_city.data):
-        if character in iffy:
-            raise ValidationError("I've heard that <Scripts> is beautiful this time of year!")
+################################################################
+# //////////---------- USA APPLICANT SIGNUP ----------\\\\\\\\\\
+################################################################
 
 class USA_ApplicantSignup(FlaskForm):
     
     first_name = StringField('First name', 
-            validators=[DataRequired(), Length(min=2, max=35), xss_first_name])
+            validators=[DataRequired(), 
+                Length(min=2, max=35), 
+                ENG_no_symbols])
 
     last_name = StringField('Last name',
-            validators=[DataRequired(), Length(min=2, max=35), xss_last_name])
+            validators=[DataRequired(), 
+                Length(min=2, max=35), 
+                ENG_no_symbols])
 
     email = StringField('Email',
-            validators=[DataRequired(), Length(max=70), Email()])
+            validators=[DataRequired(), 
+                Length(max=70), 
+                Email()])
 
     cell_phone = StringField('Cell phone number',
-            validators=[DataRequired(), Length(min=10, max=10), phone_check])
+            validators=[DataRequired(), 
+                Length(min=10, max=10), 
+                ENG_phone_check])
 
     password = PasswordField('Password (minimum of 8 characters)',
-            validators=[DataRequired(), Length(min=8)])
+            validators=[DataRequired(), 
+                Length(min=8)])
 
     verify_password = PasswordField('Verify your password',
-            validators=[DataRequired(), verify_password])
+            validators=[DataRequired(), 
+                ENG_password_check])
 
     home_city = StringField('What city do you live in?',
-            validators=[DataRequired(), Length(min=3, max=22), xss_city])
+            validators=[DataRequired(), 
+                Length(min=3, max=22), 
+                ENG_no_symbols])
 
     home_state = SelectField('What state do you live in?', choices=[
         ('101000', 'Alabama'),
@@ -311,56 +442,206 @@ class USA_ApplicantSignup(FlaskForm):
         ('105056', 'Ventura'),
         ('105057', 'Yolo'),
         ('105058', 'Yuba')],
-        validators=[DataRequired(), california])
+        validators=[DataRequired(), 
+                ENG_california_check])
 
     home_zip = StringField('ZIP code',
-            validators=[DataRequired(), Length(min=5, max=5), number_check])
+            validators=[DataRequired(), 
+                Length(min=5, max=5), 
+                ENG_phone_check])
 
-    submit = SubmitField()
+    submit = SubmitField('Sign up')
 
-def skype_check(form, field):
-    iffy = ['<','>','/',':',';','=','"',"'",'`','(',')','!','#', '*', '$', '%', '{','}','[',']','?','~']
-    for character in str(form.skype_id.data):
-        if character in iffy:
-            raise ValidationError("Your response contains characters that are not allowed.")
 
-def address_check(form, field):
-    iffy = ['<','>','/',':',';','=','"',"'",'`','(',')','!', '*', '$', '%', '{','}','[',']','?','~']
-    for character in str(form.address_street.data):
-        if character in iffy:
-            raise ValidationError("Your response contains characters that are not allowed.")
+#################################################################
+# //////////---------- CHINA EMPLOYER SIGNUP ----------\\\\\\\\\\
+#################################################################
+
+class China_EmployerSignup(FlaskForm):
+
+    school_name_chi = StringField('学校名称（中文）',
+            validators=[DataRequired(message='抱歉，此字段不能为空。'),
+                Length(min=5, max=30, message='抱歉，您的回复必须在5和30个字符之间。'),
+                CHI_hanzi_only])
+
+    school_name_eng = StringField('学校名称（英文）',
+            validators=[DataRequired(message='抱歉，此字段不能为空。'),
+                Length(min=10, max=100, message='抱歉，您的回复必须在10和100个字符之间。'),
+                CHI_no_symbols])
+
+    email = StringField('邮箱',
+            validators=[DataRequired(message='抱歉，此字段不能为空。'), 
+                Length(max=70, message='抱歉，您的回复太长。'), 
+                Email(message='抱歉，您没有输入有效的电子邮件地址。')])
+
+    password = PasswordField('密码（至少8字符）',
+            validators=[DataRequired(message='抱歉，此字段不能为空。'),
+                Length(min=8, message='抱歉，您的密码必须至少8个字符长。')])
+
+    verify_password = PasswordField('确认密码',
+            validators=[DataRequired(message='抱歉，此字段不能为空。'),
+                CHI_password_check])
+
+    cell_phone = StringField('代表人手机号码',
+            validators=[DataRequired(message='抱歉，此字段不能为空。'),
+                Length(min=11, max=11, message='抱歉，您的回复必须为11个字符长。'),
+                CHI_phone_check])
+
+    landline_phone = StringField('座机电话号码',
+            validators=[DataRequired(message='抱歉，此字段不能为空。'),
+                Length(min=11, max=11, message='抱歉，您的回复必须为11个字符长。'),
+                CHI_phone_check])
+
+    representative_name = StringField('代表人姓名',
+            validators=[DataRequired(message='抱歉，此字段不能为空。'),
+                Length(min=2, max=70, message='抱歉，您的回复必须在2和70个字符之间。'),
+                CHI_no_symbols])
+
+    edu_jurisdiction = StringField('教育主管部门',
+            validators=[DataRequired(message='抱歉，此字段不能为空。'),
+                Length(min=2, max=10, message='抱歉，您的回复必须在2和10个字符之间。'),
+                CHI_hanzi_only])
+
+    edu_license_number = StringField('中华人民共和国民办学校办学许可证教民号',
+            validators=[DataRequired(message='抱歉，此字段不能为空。'),
+                Length(min=15, max=15, message='抱歉，您的回复必须为15个字符长。'),
+                CHI_no_symbols])
+
+    edu_license_exp_date = DateField('办学许可证失效日期 (yyyy-mm-dd)',
+            validators=[DataRequired(message='请确保您输入的日期是用【年年年年－月月－日日】格式。'),
+                CHI_exp_date_check])
+
+    business_type = SelectField('营业类型', choices=[
+        ('01', '有限责任公司'),     # Limited liability company
+        ('02', '股份有限公司'),     # Joint-stock company
+        ('03', '有限合伙企业'),     # Limited partnership
+        ('04', '外商独资公司'),     # Wholly foreign owned company
+        ('05', '个人独资企业'),     # Individual proprietorship
+        ('06', '国有独资公司'),     # Wholly state-owned company
+        ('07', '其他')],            # Other
+        validators=[DataRequired(message='抱歉，此字段不能为空。')])
+
+    established_date = DateField('成立日期 (yyyy-mm-dd)',
+            validators=[DataRequired(message='请确保您输入的日期是用【年年年年－月月－日日】格式。'),
+                CHI_est_date_check])
+
+    address_province = SelectField('地址（省）', choices=[
+        ('101000', '安徽省'),           # Anhui
+        ('102000', '北京市'),           # Beijing
+        ('103000', '重庆市'),           # Chongqing
+        ('104000', '福建省'),           # Fujian
+        ('105000', '甘肃省'),           # Gansu
+        ('106000', '广东省'),           # Guangdong
+        ('107000', '广西壮族自治区'),   # Guangxi 
+        ('108000', '贵州省'),           # Guizhou
+        ('109000', '海南省'),           # Hainan
+        ('110000', '河北省'),           # Hebei
+        ('111000', '黑龙江省'),         # Heilongjiang
+        ('112000', '河南省'),           # Henan
+        ('113000', '香港特别行政区'),   # Hong Kong -- throws "different visa system" error
+        ('114000', '湖北省'),           # Hubei
+        ('115000', '湖南省'),           # Hunan
+        ('116000', '內蒙古自治区'),     # Inner Mongolia
+        ('117000', '江苏省'),           # Jiangsu
+        ('118000', '江西省'),           # Jiangxi
+        ('119000', '吉林省'),           # Jilin
+        ('120000', '辽宁省'),           # Liaoning
+        ('121000', '澳门特别行政区'),   # Macau -- throws "different visa system" error
+        ('122000', '宁夏回族自治区'),   # Ningxia
+        ('123000', '青海省'),           # Qinghai
+        ('124000', '陕西省'),           # Shaanxi
+        ('125000', '山东省'),           # Shandong
+        ('126000', '上海市'),           # Shanghai
+        ('127000', '山西省'),           # Shandong
+        ('128000', '四川省'),           # Sichuan
+        ('129000', '台湾省'),           # Taiwan -- throws "different visa system" error
+        ('130000', '天津市'),           # Tianjin
+        ('131000', '西藏自治区'),       # Tibet -- throws "politically sensitive" error
+        ('132000', '新疆维吾尔自治区'), # Xinjiang -- throws "politically sensitive" error
+        ('133000', '云南省'),           # Yunnan
+        ('134000', '浙江省')],          # Zhejiang
+        validators=[DataRequired(message='抱歉，此字段不能为空。'), 
+            CHI_province_check])
+
+    address_city = StringField('地址（市）',
+            validators=[DataRequired(message='抱歉，此字段不能为空。'),
+                Length(min=2, max=10, message='抱歉，您的回复必须在2和10个字符之间。'),
+                CHI_hanzi_only])
+
+    address_street = StringField('地址',
+            validators=[DataRequired(message='抱歉，此字段不能为空。'),
+                Length(min=5, max=30, message='抱歉，您的回复必须在5和30个字符之间。'),
+                CHI_address_check])
+
+    social_credit_number = StringField('统一社会信用代码',
+            validators=[DataRequired(message='抱歉，此字段不能为空。'),
+                Length(min=18, max=18, message='抱歉，您的回复必须为18个字符长。'),
+                CHI_no_symbols])
+
+    business_license_exp_date = DateField('营业执照失效日期 (yyyy-mm-dd)',
+            validators=[DataRequired(message='请确保您输入的日期是用【年年年年－月月－日日】格式。'),
+                CHI_exp_date_check])
+
+    submit = SubmitField('注册')
+
+
+################################################################
+# //////////---------- USA AFFILIATE SIGNUP ----------\\\\\\\\\\
+################################################################
 
 class USA_AffiliateSignup(FlaskForm):
     
     first_name = StringField('First name',
-            validators=[DataRequired(), Length(min=2,max=35), xss_first_name])
+            validators=[DataRequired(), 
+                Length(min=2,max=35), 
+                ENG_no_symbols])
     
     last_name = StringField('Last name',
-            validators=[DataRequired(), Length(min=2,max=35), xss_last_name])
+            validators=[DataRequired(), 
+                Length(min=2,max=35), 
+                ENG_no_symbols])
+    
+    dob = DateField('Date of birth (yyyy-mm-dd)',
+            validators=[DataRequired(message='Make sure your response is in yyyy-mm-dd format.'),
+                ENG_dob_check])
     
     email = StringField('Email',
-            validators=[DataRequired(), Email(), Length(max=70)])
+            validators=[DataRequired(), 
+                Email(), 
+                Length(max=70)])
     
     password = PasswordField('Password (minimum of 8 characters)',
-            validators=[DataRequired(), Length(min=8)])
+            validators=[DataRequired(), 
+                Length(min=8)])
     
     verify_password = PasswordField('Verify password',
-            validators=[DataRequired(), verify_password])
+            validators=[DataRequired(),
+                ENG_password_check])
     
     cell_phone = StringField('Cell phone number',
-            validators=[DataRequired(), Length(min=10, max=10), phone_check])
+            validators=[DataRequired(), 
+                Length(min=10, max=10), 
+                ENG_phone_check])
     
     skype_id = StringField('Skype ID',
-            validators=[DataRequired(), Length(max=70), skype_check])
+            validators=[DataRequired(), 
+                Length(max=70), 
+                ENG_no_symbols])
     
     paypal_email = StringField('PayPal email',
-            validators=[DataRequired(), Email(), Length(max=70)])
+            validators=[DataRequired(), 
+                Email(), 
+                Length(max=70)])
     
     home_street = StringField('Street address',
-            validators=[DataRequired(), Length(min=7, max=35), address_check])
+            validators=[DataRequired(), 
+                Length(min=7, max=35), 
+                ENG_no_symbols])
     
     home_city = StringField('City',
-            validators=[DataRequired(), Length(min=3, max=22), xss_city])
+            validators=[DataRequired(), 
+                Length(min=3, max=22), 
+                ENG_no_symbols])
     
     home_state = SelectField('State', choices=[
         ('101000', 'Alabama'),
@@ -476,110 +757,48 @@ class USA_AffiliateSignup(FlaskForm):
         ('105056', 'Ventura'),
         ('105057', 'Yolo'),
         ('105058', 'Yuba')],
-        validators=[DataRequired(), california])
+        validators=[DataRequired(), 
+                ENG_california_check])
 
     home_zip = StringField('ZIP code',
-            validators=[DataRequired(), Length(min=5,max=5), number_check])
+            validators=[DataRequired(),
+                Length(min=5,max=5),
+                ENG_phone_check])
     
     # recaptcha
     
-    submit = SubmitField()
+    submit = SubmitField('Sign up')
 
-def province_check(form, field):
-    if form.address_province.data == '113000' or form.address_province.data == '121000' or form.address_province.data == '129000':
-        raise ValidationError('您所在省的簽證要求與中國大陸不同。因此，我們目前無法接受您的申請，感謝您的理解。')
-        # Your province's visa app requirements are different from Mainland China, so we cannot your application. Thanks for understanding.
 
-    elif form.address_province.data == '131000' or form.address_province.data == '132000':
-        raise ValidationError('因为您所在自治区目前政治敏感性非常高，所以我们的外教很难在您所在地区申请工作签证。因此，我们公司选择不接受您所在自治区的学校申请，感谢您的理解。')
-        # Your autonomous region is currently very politically sensitive, so it is hard for our teachers to get work visas. Therefore, we have chosen not to accept applications from schools in your auto region, thanks for understanding.
+##################################################################
+# //////////---------- CHINA AFFILIATE SIGNUP ----------\\\\\\\\\\
+##################################################################
 
-def school_name_chi_check(form, field):
-    iffy = ['A', 'B', 'C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z',
-            'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z',
-            '~','`','1','!','2','@','3','#','4','$','5','%','6','^','7','&','8','*','9','(','0',')','-','_','+','=','[','{',']','}',
-            ':',';','"',"'",'|','<',',','.','>','?','/']
-    for character in str(form.school_name_chi.data):
-        if character in iffy:
-            raise ValidationError("仅输入中文字。")
+class China_AffiliateSignup(FlaskForm):
 
-def school_name_eng_check(form, field):
-    iffy = ['<','>','/',':',';','=','"',"'",'`','(',')','!','#', '*', '$', '%', '{','}','[',']','?','~']
-    for character in str(form.school_name_eng.data):
-        if character in iffy:
-            raise ValidationError("抱歉，您不能输入这符号 -- {}。".format(character))
-
-def password_check(form, field):
-    if form.password.data != form.verify_password.data:
-        raise ValidationError("两个密码不匹配!")
-
-def chi_phone_check(form, field):
-    numbers = ['0','1','2','3','4','5','6','7','8','9']
-    for character in str(form.cell_phone.data):
-        if character not in numbers:
-            raise ValidationError('仅输入数字')
-
-def representative_name_check(form, field):
-    iffy = ['<','>','/',':', ';', '=', '"', '`', '(', ')', '!', '#', '*', '$', '%', '{', '}', '[', ']', '?', '~']
-    for character in str(form.representative_name.data):
-        if character in iffy:
-            raise ValidationError("抱歉，您不能输入这符号 -- {}。".format(character))
-
-def edu_jurisdiction_check(form, field):
-    iffy = ['A', 'B', 'C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z',
-            'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z',
-            '~','`','1','!','2','@','3','#','4','$','5','%','6','^','7','&','8','*','9','(','0',')','-','_','+','=','[','{',']','}',
-            ':',';','"',"'",'|','<',',','.','>','?','/']
-    for character in str(form.edu_jurisdiction.data):
-        if character in iffy:
-            raise ValidationError("仅输入中文字。")
-
-def edu_license_number_check(form, field):
-    iffy = ['<','>','/',':',';','=','"',"'",'`','(',')','!','#', '*', '$', '%', '{','}','[',']','?','~']
-    for character in str(form.edu_license_number.data):
-        if character in iffy:
-            raise ValidationError("抱歉，您不能输入这符号 -- {}。".format(character))
-
-def address_city_check(form, field):
-    iffy = ['A', 'B', 'C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z',
-            'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z',
-            '~','`','1','!','2','@','3','#','4','$','5','%','6','^','7','&','8','*','9','(','0',')','-','_','+','=','[','{',']','}',
-            ':',';','"',"'",'|','<',',','.','>','?','/']
-    for character in str(form.address_city.data):
-        if character in iffy:
-            raise ValidationError("仅输入中文字。")
-
-def address_street_check(form, field):
-    iffy = ['A', 'B', 'C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z',
-            'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z',
-            '~','`','1','!','2','@','3','#','4','$','5','%','6','^','7','&','8','*','9','(','0',')','-','_','+','=','[','{',']','}',
-            ':',';','"',"'",'|','<',',','.','>','?','/']
-    for character in str(form.address_street.data):
-        if character in iffy:
-            raise ValidationError("仅输入中文字。")
-
-def social_credit_check(form, field):
-    iffy = ['<','>','/',':',';','=','"',"'",'`','(',')','!','#', '*', '$', '%', '{','}','[',']','?','~']
-    for character in str(form.social_credit_number.data):
-        if character in iffy:
-            raise ValidationError("抱歉，您不能输入这符号 -- {}。".format(character))
-
-class China_EmployerSignup(FlaskForm):
-
-    school_name_chi = StringField('学校名称（中文）',
+    last_name = StringField('姓',
             validators=[DataRequired(message='抱歉，此字段不能为空。'),
-                Length(min=5, max=30, message='抱歉，您的回复必须在5和30个字符之间。'),
-                school_name_chi_check])
+                Length(max=35, message='抱歉，您的回复必须在1和35个字符之间。'),
+                CHI_no_symbols])
 
-    school_name_eng = StringField('学校名称（英文）',
+    given_name = StringField('名',
             validators=[DataRequired(message='抱歉，此字段不能为空。'),
-                Length(min=10, max=100, message='抱歉，您的回复必须在10和100个字符之间。'),
-                school_name_eng_check])
+                Length(max=35, message='抱歉，您的回复必须在1和35个字符之间。'),
+                CHI_no_symbols])
+
+    dob = DateField('出生日期 (yyyy-mm-dd)',
+            validators=[DataRequired(message='请确保您输入的日期是用【年年年年－月月－日日】格式。'),
+                CHI_dob_check])
 
     email = StringField('邮箱',
-            validators=[DataRequired(message='抱歉，此字段不能为空。'), 
-                Length(max=70, message='抱歉，您的回复太长。'), 
+            validators=[DataRequired(message='抱歉，此字段不能为空。'),
+                Length(max=70, message='抱歉，您的回复太长。'),
                 Email(message='抱歉，您没有输入有效的电子邮件地址。')])
+
+    cell_phone = StringField('手机号',
+            validators=[DataRequired(message='抱歉，此字段不能为空。'),
+                Length(min=11, max=11, message='抱歉，您的回复必须为11个字符长。'),
+                CHI_phone_check])
 
     password = PasswordField('密码（至少8字符）',
             validators=[DataRequired(message='抱歉，此字段不能为空。'),
@@ -587,50 +806,7 @@ class China_EmployerSignup(FlaskForm):
 
     verify_password = PasswordField('确认密码',
             validators=[DataRequired(message='抱歉，此字段不能为空。'),
-                password_check])
-
-    cell_phone = StringField('代表人手机号码',
-            validators=[DataRequired(message='抱歉，此字段不能为空。'),
-                Length(min=11, max=11, message='抱歉，您的回复必须为11个字符长。'),
-                chi_phone_check])
-
-    landline_phone = StringField('座机电话号码',
-            validators=[DataRequired(message='抱歉，此字段不能为空。'),
-                Length(min=11, max=11, message='抱歉，您的回复必须为11个字符长。'),
-                chi_phone_check])
-
-    representative_name = StringField('代表人姓名',
-            validators=[DataRequired(message='抱歉，此字段不能为空。'),
-                Length(min=2, max=70, message='抱歉，您的回复必须在2和70个字符之间。'),
-                representative_name_check])
-
-    edu_jurisdiction = StringField('教育主管部门',
-            validators=[DataRequired(message='抱歉，此字段不能为空。'),
-                Length(min=2, max=10, message='抱歉，您的回复必须在2和10个字符之间。'),
-                edu_jurisdiction_check])
-
-    edu_license_number = StringField('中华人民共和国民办学校办学许可证教民号',
-            validators=[DataRequired(message='抱歉，此字段不能为空。'),
-                Length(min=15, max=15, message='抱歉，您的回复必须为15个字符长。'),
-                edu_license_number_check])
-
-    edu_license_exp_date = DateField('办学许可证失效日期',
-            validators=[DataRequired(message='抱歉，此字段不能为空。')])
-    # Need another pass
-
-    business_type = SelectField('营业类型', choices=[
-        ('01', '有限责任公司'),     # Limited liability company
-        ('02', '股份有限公司'),     # Joint-stock company
-        ('03', '有限合伙企业'),     # Limited partnership
-        ('04', '外商独资公司'),     # Wholly foreign owned company
-        ('05', '个人独资企业'),     # Individual proprietorship
-        ('06', '国有独资公司'),     # Wholly state-owned company
-        ('07', '其他')],            # Other
-        validators=[DataRequired(message='抱歉，此字段不能为空。')])
-
-    established_date = DateField('成立日期',
-            validators=[DataRequired(message='抱歉，此字段不能为空。')])
-    #Need another pass
+                CHI_password_check])
 
     address_province = SelectField('地址（省）', choices=[
         ('101000', '安徽省'),           # Anhui
@@ -639,7 +815,7 @@ class China_EmployerSignup(FlaskForm):
         ('104000', '福建省'),           # Fujian
         ('105000', '甘肃省'),           # Gansu
         ('106000', '广东省'),           # Guangdong
-        ('107000', '广西壮族自治区'),   # Guangxi 
+        ('107000', '广西壮族自治区'),   # Guangxi
         ('108000', '贵州省'),           # Guizhou
         ('109000', '海南省'),           # Hainan
         ('110000', '河北省'),           # Hebei
@@ -667,32 +843,24 @@ class China_EmployerSignup(FlaskForm):
         ('132000', '新疆维吾尔自治区'), # Xinjiang -- throws "politically sensitive" error
         ('133000', '云南省'),           # Yunnan
         ('134000', '浙江省')],          # Zhejiang
-        validators=[DataRequired(message='抱歉，此字段不能为空。'), 
-            province_check])
+        validators=[DataRequired(message='抱歉，此字段不能为空。'),
+            CHI_province_check])
 
     address_city = StringField('地址（市）',
             validators=[DataRequired(message='抱歉，此字段不能为空。'),
                 Length(min=2, max=10, message='抱歉，您的回复必须在2和10个字符之间。'),
-                address_city_check])
+                CHI_hanzi_only])
 
     address_street = StringField('地址',
             validators=[DataRequired(message='抱歉，此字段不能为空。'),
                 Length(min=5, max=30, message='抱歉，您的回复必须在5和30个字符之间。'),
-                address_street_check])
+                CHI_address_check])
 
-    social_credit_number = StringField('统一社会信用代码',
+    wechat_id = StringField('微信用户名',
             validators=[DataRequired(message='抱歉，此字段不能为空。'),
-                Length(min=18, max=18, message='抱歉，您的回复必须为18个字符长。'),
-                social_credit_check])
+                Length(max=70, message='太长了！'),
+                CHI_no_symbols])
 
-    business_license_exp_date = DateField('营业执照失效日期',
-            validators=[DataRequired(message='抱歉，此字段不能为空。')])
-    # Need another pass
+    # recaptcha
 
-    # recaptcha? (does it even fucking work in china???)
-
-    submit = SubmitField()
-
-
-#class China_AffiliateSignup(FlaskForm):
-    #dfsdfs
+    submit = SubmitField('注册')
