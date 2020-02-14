@@ -1,0 +1,94 @@
+# Upload scans for translation when submitting receipts
+
+DAY 0:		app.config['HELP_EMAIL']
+		mail.checkpoint(1)
+
+DAY 1:		usa_applicant.get_teaching_credential
+		usa_applicant.dashboard
+
+DAY 2:		
+
+DAY 3:		
+
+DAY 4:		
+
+DAY 5:		usa_applicant.info_contract
+
+DAY 6:		
+
+DAY 7:		
+
+DAY 8:		
+
+DAY 9:		
+
+DAY 10:		
+
+DAY 11:		
+
+DAY 12:		
+
+DAY 13:		
+
+DAY 14:		usa_applicant.get_police_clearance
+		# Need to clarify page numbers for police
+
+DAY 15:		usa_applicant.get_resume
+
+DAY 16:		usa_applicant.get_letters_of_recommendation
+		# Need to build a system to receive these
+
+DAY 17:		usa_applicant.scan_diploma
+
+DAY 18:		mail.checkpoint(2)
+		usa_applicant.scan_police_clearance
+		usa_applicant.scan_teaching_credential
+
+DAY 19:		usa_applicant.get_authentication
+		# Need to clarify page numbers for police
+
+DAY 20:		
+
+DAY 21 (USA):
+
+DAY 21 (HOU):	usa_applicant.get_job_description
+
+DAY 21 (SFO):	
+
+DAY 21 (WDC):
+
+DAY 22:	
+
+DAY 22 (HOU):
+
+DAY 22 (SFO):
+
+DAY 22 (WDC):	
+
+DAY 23:	
+
+DAY 23 (HOU):
+
+DAY 23 (SFO):
+
+DAY 23 (WDC):
+
+DAY 24:		mail.checkpoint(3)
+		usa_applicant.info_visa_photos
+
+DAY 25:		usa_applicant.enter_employer_information
+		usa_applicant.scan_contract
+
+DAY 26:		usa_applicant.get_tourist_visa
+
+DAY 27:		usa_applicant.get_medical_check
+
+DAY 28:		
+
+DAY 29:		
+
+DAY 30:		usa_applicant.get_language_resources
+
+DAY 41:		usa_applicant.get_vpn
+
+DAY 42:		usa_applicant.get_receipts		

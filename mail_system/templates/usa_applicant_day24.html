@@ -1,0 +1,29 @@
+<p>Hi, {{ first_name }}! Welcome to Day 24.</p>
+
+<p><b>By this point, you should have already:</b></p>
+<ul>
+	<li>Reviewed and uploaded your resume.</li>
+	<li>Sent out requests for letters of recommendation.</li>
+	<li>Sent your college diploma and TEFL certification to CVSC for authentication.</li>
+	<li>Sent your FBI background check report to CVSC.</li>
+	<li><b>Completed consulate-specific tasks. (Don't worry if you don't know what we're talking about.)</b></li>
+</ul>
+
+<p><b>Here's what you need to do today:</b></p>
+<ul>
+	<li>Print out <a href="{{ url_for('usa_applicant.info_visa_photos') }}">this</a> document.</li>
+	<li>Go to a professional passport photo service and give them the requirements. Get at least two photos.</li>
+	<li>If you are ethnically Chinese (i.e. you were born in China, Hong Kong, Taiwan, or Macau), check <a href="https://www.mychinavisa.com/special-requirements">here</a> to see if any special requirements apply to you.</li>
+</ul>
+<p>~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</p>
+<h2>If you have everything ready, click <a href="{{ url_for(mail.checkpoint(3)) }}">here</a> to verify that you are on schedule.</h2>
+<p>(If you click the link above, you will receive another email tomorrow.)</p>
+
+<h2>If you don't have everything ready, DO NOT click on the link until you are on schedule.</h2>
+<p>(You will not receive another email until you click the link.)</p>
+<p>~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</p>
+<p>Don't forget to check your <a href="{{ url_for('usa_applicant.dashboard') }}">dashboard</a> for job opportunities! No pressure, but we're expecting you to find a job <b>by tomorrow</b>.</p>
+<p>Read <a href="{{ url_for('usa_applicant.info_contract') }}">this</a> before you sign a contract.</p>
+
+<p>Beep boop,<br/>
+Rover the Robot</p>

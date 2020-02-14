@@ -1,0 +1,31 @@
+<p>Hi, {{ first_name }}! Welcome to Day 18.</p>
+
+<p><b>By this point, you should have already:</b></p>
+<ul>
+	<li>Checked your passport and applied for a passport renewal if necessary.</li>
+	<li>Reviewed and uploaded your resume.</li>
+	<li>Sent out requests for letters of recommendation.</li>
+	<li><b>Found your college diploma.</b></li>
+	<li><b>Received your FBI background check report.</b></li>
+	<li><b>Received your TEFL certification.</b></li>
+</ul>
+
+<p><b>Here's what you need to do today:</b></p>
+<ul>
+	<li>You should have received your FBI background check report today. Scan and upload a JPG version of your background check <a href="{{ url_for('usa_applicant.scan_police_clearance') }}">here</a>. (When you get a job, we'll send this to your employer so they can start translating it into Chinese.)</</li>
+	<li>You should have received your TEFL certification today. Scan and upload a JPG version of your certification <a href="{{ url_for('usa_applicant.scan_teaching_credential') }}">here</a>. (When you get a job, we'll send this to your employer so they can start translating it into Chinese.)</</li>
+</ul>
+
+<p>~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</p>
+<h2>If you have everything ready, click <a href="{{ url_for(mail.checkpoint(2)) }}">here</a> to verify that you are on schedule.</h2>
+<p>(If you click the link above, you will receive another email tomorrow.)</p>
+
+<h2>If you don't have everything ready, DO NOT click on the link until you are on schedule.</h2>
+<p>(You will not receive another email until you click the link.)</p>
+<p>~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</p>
+
+<p>Don't forget to check your <a href="{{ url_for('usa_applicant.dashboard') }}">dashboard</a> for job opportunities! No pressure, but we're expecting you to find a job in the next <b>7</b> days.</p>
+<p>Read <a href="{{ url_for('usa_applicant.info_contract') }}">this</a> before you sign a contract.</p>
+
+<p>Beep boop,<br/>
+Rover the Robot</p>
